@@ -49,13 +49,17 @@ Engram uses Microsoft Edge WebView2 to draw its window. It's part of Windows 11 
 - Check you downloaded the right file. The **Apple Silicon** build doesn't run on Intel Macs.
 - If macOS shows a security message, follow the steps under [Install warnings](#install-warnings).
 
+### "Setup failed: unknown path" on Linux
+
+Engram saves notes in your Documents folder, and couldn't find where that is. This happens on Linux systems without the standard user folders set up. Run `xdg-user-dirs-update` in a terminal (install the `xdg-user-dirs` package first if needed), then try again.
+
 ### Engram shows "Could not start Engram"
 
 This screen shows an error message and a **Reload** button. Press **Reload** first. If it keeps happening, the usual cause is that Engram can't read the active profile's folder, for example because it's on a drive that isn't connected. Reconnect the drive and press **Reload**. If that doesn't help, [report a bug](/support/report-a-bug/) and include the exact error message.
 
 ### A profile's folder won't open
 
-Engram can only open vault folders inside your user folder (such as `Documents` or your home folder). If you picked a folder elsewhere, like a second drive, it may work at first but fail after you restart Engram. Move the folder into your user folder, then create a profile that points at its new location (**Profiles**, **New profile**, **Browse**).
+Engram can only use vault folders inside your user folder, such as `Documents` or your home folder. If you pick a folder somewhere else (for example on a second drive), you may see an error mentioning a **forbidden path**. Move the folder into your user folder, then create a profile that points at its new location (**Profiles**, **New profile**, **Browse**).
 
 ## Lost or missing data
 

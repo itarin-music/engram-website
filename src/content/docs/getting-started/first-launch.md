@@ -32,6 +32,8 @@ A plain explanation of what Engram does: write notes, turn the important parts i
 
 Pick a theme pack. Clicking a pack previews it straight away behind the setup window. You can also turn on **Reduce effects** here, which switches off glow, blur and motion. Everything on this step can be changed later in [Themes](/docs/features/themes/).
 
+![The Look step showing the seven theme packs with colour swatches, and the Reduce effects option](../../../assets/shots/setup-look.png)
+
 ### 4. Tour
 
 A map of every section in the sidebar and a three-step example of how a note becomes a flashcard.
