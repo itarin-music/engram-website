@@ -1,0 +1,20 @@
+---
+/** Layout for standalone markdown pages in src/pages (support and legal pages). */
+import Page from './Page.astro';
+const { frontmatter } = Astro.props;
+---
+<Page
+  title={frontmatter.title}
+  description={frontmatter.description}
+  kicker={frontmatter.kicker ?? 'Engram'}
+  heading={frontmatter.heading ?? frontmatter.title}
+  lead={frontmatter.lead}
+  searchable={frontmatter.searchable !== false}
+>
+  {frontmatter.draft && (
+    <div class="draft-banner" role="note">
+      <strong>Draft for review.</strong> This is a plain-English draft written to match how Engram currently works. It has not been reviewed by a lawyer and is not legal advice. Last updated {frontmatter.updated}.
+    </div>
+  )}
+  <slot />
+</Page>

@@ -1,0 +1,16 @@
+---
+import Docs from '../../layouts/Docs.astro';
+import { sidebar, hrefOf } from '../../lib/docs';
+const groups = await sidebar();
+---
+<Docs title="Engram docs" description="How to install Engram, set it up, and use every part of it. Written for everyday users, not developers.">
+  <p>New to Engram? Start with <a href="/docs/getting-started/install/">Install Engram</a> and <a href="/docs/getting-started/first-launch/">First launch and setup</a>. Stuck on something? Try the <a href="/support/troubleshooting/">troubleshooting guide</a>.</p>
+  {groups.map((g) => (
+    <>
+      <h2>{g.title}</h2>
+      <ul>
+        {g.items.map((d) => <li><a href={hrefOf(d)}>{d.data.title}</a>: {d.data.description}</li>)}
+      </ul>
+    </>
+  ))}
+</Docs>

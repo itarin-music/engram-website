@@ -1,0 +1,4 @@
+{
+  "$comment": "Single source of release info for the whole site. Do not edit by hand: run `npm run release:import -- vX.Y.Z` after publishing a release. An empty list shows the 'coming soon' state everywhere.",
+  "releases": []
+}

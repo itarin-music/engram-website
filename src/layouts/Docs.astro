@@ -1,0 +1,121 @@
+---
+import type { MarkdownHeading } from 'astro';
+import Base from './Base.astro';
+import Search from '../components/Search.astro';
+import { sidebar, orderedDocs, hrefOf, SECTIONS, sectionOf, type DocEntry } from '../lib/docs';
+
+interface Props {
+  entry?: DocEntry;
+  title: string;
+  description: string;
+  headings?: MarkdownHeading[];
+}
+const { entry, title, description, headings = [] } = Astro.props;
+const groups = await sidebar();
+const all = await orderedDocs();
+const i = entry ? all.findIndex((d) => d.id === entry.id) : -1;
+const prev = i > 0 ? all[i - 1] : null;
+const next = i >= 0 && i < all.length - 1 ? all[i + 1] : entry ? null : all[0];
+const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
+const showToc = toc.filter((h) => h.depth === 2).length >= 3;
+const section = entry ? SECTIONS.find((s) => s.id === sectionOf(entry))?.title : 'Docs';
+const current = Astro.url.pathname;
+---
+<Base title={title} description={description}>
+  <div class="wrap docs-shell">
+    <aside class="docs-side" aria-label="Documentation">
+      <Search id="docs-search" />
+      <nav class="docs-nav docs-nav-desktop" aria-label="Docs pages">
+        <a class="docs-home" href="/docs/" aria-current={current === '/docs/' ? 'page' : undefined}>Docs home</a>
+        {groups.map((g) => (
+          <div class="docs-group">
+            <h2>{g.title}</h2>
+            <ul>{g.items.map((d) => <li><a href={hrefOf(d)} aria-current={current === hrefOf(d) ? 'page' : undefined}>{d.data.navTitle ?? d.data.title}</a></li>)}</ul>
+          </div>
+        ))}
+      </nav>
+      <details class="docs-nav-mobile">
+        <summary>Docs menu</summary>
+        <nav aria-label="Docs pages (menu)">
+          <a class="docs-home" href="/docs/">Docs home</a>
+          {groups.map((g) => (
+            <div class="docs-group">
+              <h2>{g.title}</h2>
+              <ul>{g.items.map((d) => <li><a href={hrefOf(d)} aria-current={current === hrefOf(d) ? 'page' : undefined}>{d.data.navTitle ?? d.data.title}</a></li>)}</ul>
+            </div>
+          ))}
+        </nav>
+      </details>
+    </aside>
+
+    <article class="docs-main" data-pagefind-body>
+      <header class="docs-head">
+        <span class="kicker" data-pagefind-ignore>{section}</span>
+        <h1>{title}</h1>
+        <p class="lead">{description}</p>
+      </header>
+      {showToc && (
+        <details class="toc toc-inline" data-pagefind-ignore>
+          <summary>On this page</summary>
+          <ul>{toc.map((h) => <li class={`d${h.depth}`}><a href={`#${h.slug}`}>{h.text}</a></li>)}</ul>
+        </details>
+      )}
+      <div class="prose">
+        <slot />
+      </div>
+      <nav class="pager" aria-label="Previous and next page" data-pagefind-ignore>
+        {prev ? <a class="pager-link prev" href={hrefOf(prev)} rel="prev"><span class="kicker">Previous</span><span>{prev.data.title}</span></a> : <span />}
+        {next ? <a class="pager-link next" href={hrefOf(next)} rel="next"><span class="kicker">Next</span><span>{next.data.title}</span></a> : <span />}
+      </nav>
+    </article>
+
+    {showToc && (
+      <aside class="toc toc-side" aria-labelledby="toc-title">
+        <h2 id="toc-title">On this page</h2>
+        <ul>{toc.map((h) => <li class={`d${h.depth}`}><a href={`#${h.slug}`}>{h.text}</a></li>)}</ul>
+      </aside>
+    )}
+  </div>
+</Base>
+
+<style>
+  .docs-shell { display: grid; gap: 2rem; padding-top: 2rem; grid-template-columns: minmax(0, 1fr); }
+  @media (min-width: 60rem) { .docs-shell { grid-template-columns: 15rem minmax(0, 1fr); } }
+  @media (min-width: 80rem) { .docs-shell { grid-template-columns: 15rem minmax(0, 1fr) 13rem; } }
+
+  .docs-side { display: flex; flex-direction: column; gap: 1rem; }
+  @media (min-width: 60rem) { .docs-side { position: sticky; top: 5rem; align-self: start; max-height: calc(100vh - 6rem); overflow: auto; padding-right: 0.25rem; } }
+  .docs-nav-desktop { display: none; }
+  @media (min-width: 60rem) { .docs-nav-desktop { display: block; } .docs-nav-mobile { display: none; } }
+  .docs-nav-mobile { border: 1px solid rgb(var(--line)); border-radius: 10px; background: rgb(var(--panel) / 0.8); }
+  .docs-nav-mobile summary { cursor: pointer; padding: 0.75rem 1rem; font-weight: 600; min-height: 2.75rem; }
+  .docs-nav-mobile nav { padding: 0 1rem 1rem; }
+  .docs-home { display: block; font-weight: 600; text-decoration: none; padding: 0.45rem 0.6rem; border-radius: 8px; color: rgb(var(--ink)); }
+  .docs-group h2 { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: rgb(var(--ink-dim)); margin: 1.2rem 0 0.4rem 0.6rem; }
+  .docs-group ul { list-style: none; padding: 0; margin: 0; }
+  .docs-group a { display: block; padding: 0.4rem 0.6rem; border-radius: 8px; text-decoration: none; color: rgb(var(--ink-dim)); font-size: 0.95rem; }
+  .docs-group a:hover, .docs-home:hover { color: rgb(var(--ink)); background: rgb(var(--panel) / 0.8); }
+  .docs-nav a[aria-current='page'], .docs-nav-mobile a[aria-current='page'] { color: rgb(var(--accent)); background: rgb(var(--panel)); font-weight: 600; }
+
+  .docs-main { min-width: 0; }
+  .docs-head { margin-bottom: 1.5rem; }
+  .docs-head .kicker { display: block; margin-bottom: 0.6rem; }
+  .docs-head h1 { font-size: clamp(1.9rem, 1.5rem + 1.6vw, 2.6rem); }
+  .docs-head .lead { font-size: 1.12rem; color: rgb(var(--ink-dim)); max-width: 44rem; }
+
+  .toc h2 { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: rgb(var(--ink-dim)); margin-bottom: 0.6rem; }
+  .toc ul { list-style: none; margin: 0; padding: 0; font-size: 0.9rem; }
+  .toc li.d3 { padding-left: 0.9rem; }
+  .toc a { display: block; padding: 0.25rem 0; color: rgb(var(--ink-dim)); text-decoration: none; }
+  .toc a:hover { color: rgb(var(--accent)); text-decoration: underline; }
+  .toc-side { display: none; }
+  @media (min-width: 80rem) { .toc-side { display: block; position: sticky; top: 5rem; align-self: start; max-height: calc(100vh - 6rem); overflow: auto; } .toc-inline { display: none; } }
+  .toc-inline { border: 1px solid rgb(var(--line)); border-radius: 10px; padding: 0 1rem; margin-bottom: 1.5rem; background: rgb(var(--panel) / 0.6); max-width: 46rem; }
+  .toc-inline summary { cursor: pointer; padding: 0.7rem 0; font-weight: 600; }
+  .toc-inline ul { padding-bottom: 0.8rem; }
+
+  .pager { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 3rem; max-width: 46rem; }
+  .pager-link { display: flex; flex-direction: column; gap: 0.2rem; padding: 0.9rem 1rem; border: 1px solid rgb(var(--line)); border-radius: 10px; text-decoration: none; background: rgb(var(--panel) / 0.6); font-weight: 600; }
+  .pager-link:hover { border-color: rgb(var(--accent)); }
+  .pager-link.next { text-align: right; grid-column: 2; }
+</style>

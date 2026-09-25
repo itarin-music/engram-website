@@ -1,0 +1,33 @@
+{
+  "name": "engram-website",
+  "private": true,
+  "version": "1.0.0",
+  "description": "The official website for Engram by Itarin: marketing pages, downloads, docs and support.",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "dev:sample": "astro dev --mode sample",
+    "build": "astro check && astro build && pagefind --site dist",
+    "build:sample": "astro build --mode sample && pagefind --site dist",
+    "preview": "astro preview",
+    "check": "astro check",
+    "check:links": "node scripts/check-links.mjs",
+    "release:import": "node scripts/import-release.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource/cormorant-garamond": "^5.3.0",
+    "astro": "^7.3.5",
+    "marked": "^18.0.14",
+    "sharp": "^0.35.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "pagefind": "^1.5.2",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

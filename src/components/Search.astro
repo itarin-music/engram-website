@@ -1,0 +1,44 @@
+---
+/**
+ * Site search, powered by Pagefind. The index is built after `astro build` (see package.json),
+ * so search only works on a built site (`npm run build && npm run preview`), not in `astro dev`.
+ * It covers the docs and support pages. Everything runs in the browser; nothing is sent anywhere.
+ */
+interface Props { id?: string }
+const { id = 'search' } = Astro.props;
+---
+<div class="search" data-search-root>
+  <div id={id} class="search-mount" data-search-mount></div>
+  <noscript><p class="muted" style="font-size:0.9rem">Search needs JavaScript. Use the menu to browse the docs.</p></noscript>
+</div>
+
+<link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+<script is:inline>
+  (function () {
+    var mounts = document.querySelectorAll('[data-search-mount]');
+    if (!mounts.length) return;
+    var s = document.createElement('script');
+    s.src = '/pagefind/pagefind-ui.js';
+    s.onload = function () {
+      mounts.forEach(function (m) {
+        new window.PagefindUI({ element: '#' + m.id, showSubResults: true, showImages: false, resetStyles: false, translations: { placeholder: 'Search the docs' } });
+      });
+    };
+    s.onerror = function () {
+      mounts.forEach(function (m) {
+        m.innerHTML = '<p class="muted" style="font-size:0.9rem;margin:0">Search is available on the built site. Run <code>npm run build</code> then <code>npm run preview</code>.</p>';
+      });
+    };
+    document.head.appendChild(s);
+  })();
+</script>
+
+<style is:global>
+  .search { --pagefind-ui-scale: 0.85; --pagefind-ui-primary: rgb(var(--accent)); --pagefind-ui-text: rgb(var(--ink)); --pagefind-ui-background: rgb(var(--panel)); --pagefind-ui-border: rgb(var(--line)); --pagefind-ui-tag: rgb(var(--panel-2)); --pagefind-ui-border-width: 1px; --pagefind-ui-border-radius: 10px; --pagefind-ui-font: var(--font-body); }
+  .search .search-mount .pagefind-ui__search-input.pagefind-ui__search-input { color: rgb(var(--ink)); font-weight: 500; }
+  .search .search-mount .pagefind-ui__search-input.pagefind-ui__search-input::placeholder { color: rgb(var(--ink-dim)); opacity: 1; }
+  .search .pagefind-ui__result-link { color: rgb(var(--accent)); }
+  .search .pagefind-ui__result-excerpt, .search .pagefind-ui__message { color: rgb(var(--ink-dim)); }
+  .search mark { background: rgb(var(--accent) / 0.25); color: inherit; }
+  .search .pagefind-ui__drawer { max-height: 70vh; overflow: auto; }
+</style>

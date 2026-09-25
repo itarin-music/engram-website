@@ -1,0 +1,59 @@
+---
+import Page from '../../layouts/Page.astro';
+import ContactEmail from '../../components/ContactEmail.astro';
+import { SITE, supportEmailSet } from '../../config/site';
+
+const template = `App version:
+Operating system and version:
+How you installed Engram (.exe, .msi, .dmg, .deb, .rpm or AppImage):
+
+What happened:
+
+What you expected to happen:
+
+Steps to reproduce:
+1.
+2.
+3.
+
+Error message (copy the exact text, if there was one):
+
+Screenshots: attached / none`;
+
+const mailto = supportEmailSet
+  ? `mailto:${SITE.supportEmail}?subject=${encodeURIComponent('Engram bug report')}&body=${encodeURIComponent(template)}`
+  : '';
+---
+<Page title="Report a bug" kicker="Support" description="How to report a problem with Engram, and what to include so it can be fixed quickly." lead="Found something broken? A clear report makes it much faster to fix." searchable>
+  <p>Before reporting, check the <a href="/support/troubleshooting/">troubleshooting guide</a>. Your problem may already have a fix.</p>
+
+  <h2 id="include">What to include</h2>
+  <ul>
+    <li><strong>App version.</strong> The version you downloaded, shown on the <a href="/download/">Download page</a> and in the installer's file name (for example the number in <code>Engram_&lt;version&gt;_x64-setup.exe</code>).</li>
+    <li><strong>Operating system.</strong> For example Windows 11, macOS 15 on Apple Silicon, or Ubuntu 24.04.</li>
+    <li><strong>Steps to reproduce.</strong> What you clicked or typed, in order, so the problem can be made to happen again.</li>
+    <li><strong>What you expected</strong> and <strong>what happened instead</strong>.</li>
+    <li><strong>The exact error message</strong>, if there was one. Copy the text rather than retyping it.</li>
+    <li><strong>Screenshots</strong>, if they help show the problem.</li>
+  </ul>
+
+  <div class="callout callout-warn">
+    <strong>Keep private things private</strong>
+    Never include your API key, passwords or payment details. Check screenshots don't show private notes you'd rather not share. You never need to send your notes folder unless you're asked for a specific file.
+  </div>
+
+  <h2 id="template">Bug report template</h2>
+  <p>Copy this into your email and fill it in:</p>
+  <pre class="template"><code>{template}</code></pre>
+
+  <h2 id="send">Send it</h2>
+  {supportEmailSet ? (
+    <p><a class="btn btn-primary" href={mailto}>Open a pre-filled email</a></p>
+  ) : null}
+  <p>Email your report to <ContactEmail subject="Engram bug report" />.</p>
+  {!supportEmailSet && <p class="muted">The support address hasn't been set up yet, so bug reports can't be sent from this site at the moment.</p>}
+</Page>
+
+<style>
+  .template { white-space: pre-wrap; background: rgb(var(--panel)); }
+</style>

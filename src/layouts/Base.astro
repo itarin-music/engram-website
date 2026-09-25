@@ -1,0 +1,51 @@
+---
+import '@fontsource-variable/inter';
+import '@fontsource/cormorant-garamond/500-italic.css';
+import '../styles/global.css';
+import { SITE } from '../config/site';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  /** Page title without the site name. Omit on the home page. */
+  title?: string;
+  description?: string;
+  /** Keep a page out of search engines (the 404 page). */
+  noindex?: boolean;
+}
+const { title, description = SITE.description, noindex = false } = Astro.props;
+const fullTitle = title ? `${title} | Engram` : `Engram by Itarin | ${SITE.tagline}`;
+const canonical = new URL(Astro.url.pathname, SITE.url).href;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#101114" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f5f6f8" media="(prefers-color-scheme: light)" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Engram" />
+    <slot name="head" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

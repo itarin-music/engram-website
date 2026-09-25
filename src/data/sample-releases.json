@@ -1,0 +1,29 @@
+{
+  "$comment": "SAMPLE DATA ONLY, for testing the 'release available' state with `npm run dev:sample` / `npm run build:sample`. These versions, sizes and checksums are fake and never appear in a normal build.",
+  "releases": [
+    {
+      "version": "0.0.2-sample",
+      "tag": "v0.0.2-sample",
+      "date": "2026-01-15",
+      "notes": "SAMPLE release notes.\n\n### Fixed\n- An example fix, to show how notes render.\n- Another example line with `inline code`.",
+      "assets": [
+        { "platform": "windows", "arch": "x64", "format": "exe", "file": "Engram_0.0.2-sample_x64-setup.exe", "size": 5452593, "sha256": "0000000000000000000000000000000000000000000000000000000000000001" },
+        { "platform": "windows", "arch": "x64", "format": "msi", "file": "Engram_0.0.2-sample_x64_en-US.msi", "size": 6815744, "sha256": "0000000000000000000000000000000000000000000000000000000000000002" },
+        { "platform": "macos", "arch": "aarch64", "format": "dmg", "file": "Engram_0.0.2-sample_aarch64.dmg", "size": 7340032, "sha256": "0000000000000000000000000000000000000000000000000000000000000003" },
+        { "platform": "macos", "arch": "x64", "format": "dmg", "file": "Engram_0.0.2-sample_x64.dmg", "size": 7549747, "sha256": "0000000000000000000000000000000000000000000000000000000000000004" },
+        { "platform": "linux", "arch": "x64", "format": "appimage", "file": "Engram_0.0.2-sample_amd64.AppImage", "size": 78643200, "sha256": "0000000000000000000000000000000000000000000000000000000000000005" },
+        { "platform": "linux", "arch": "x64", "format": "deb", "file": "Engram_0.0.2-sample_amd64.deb", "size": 6291456, "sha256": "0000000000000000000000000000000000000000000000000000000000000006" },
+        { "platform": "linux", "arch": "x64", "format": "rpm", "file": "Engram-0.0.2-sample-1.x86_64.rpm", "size": 6291456, "sha256": "0000000000000000000000000000000000000000000000000000000000000007" }
+      ]
+    },
+    {
+      "version": "0.0.1-sample",
+      "tag": "v0.0.1-sample",
+      "date": "2025-12-01",
+      "notes": "SAMPLE first release. Windows only, to show how a platform without a build looks.",
+      "assets": [
+        { "platform": "windows", "arch": "x64", "format": "exe", "file": "Engram_0.0.1-sample_x64-setup.exe", "size": 5242880, "sha256": "0000000000000000000000000000000000000000000000000000000000000008" }
+      ]
+    }
+  ]
+}

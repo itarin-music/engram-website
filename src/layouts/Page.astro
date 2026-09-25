@@ -1,0 +1,27 @@
+---
+import Base from './Base.astro';
+interface Props {
+  title: string;
+  description: string;
+  kicker: string;
+  heading?: string;
+  lead?: string;
+  /** Include this page in site search. */
+  searchable?: boolean;
+}
+const { title, description, kicker, heading = title, lead, searchable = false } = Astro.props;
+---
+<Base title={title} description={description}>
+  <div class="wrap">
+    <article data-pagefind-body={searchable ? '' : undefined}>
+      <header class="page-head">
+        <span class="kicker" data-pagefind-ignore>{kicker}</span>
+        <h1>{heading}</h1>
+        {lead && <p class="lead">{lead}</p>}
+      </header>
+      <div class="prose">
+        <slot />
+      </div>
+    </article>
+  </div>
+</Base>

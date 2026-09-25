@@ -1,0 +1,54 @@
+---
+import { SITE } from '../config/site';
+import { latest } from '../lib/releases';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="wordmark" href="/" aria-label="Engram by Itarin, home"><span class="wm-name" aria-hidden="true">Engram</span><span class="wm-by" aria-hidden="true">by Itarin</span></a>
+        <p class="muted" style="margin-top:1rem;max-width:18rem;font-size:0.9rem">A local-first study app. No ads, no tracking.</p>
+      </div>
+      <nav aria-labelledby="f-product">
+        <h2 id="f-product">Product</h2>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/download/">Download</a></li>
+          <li><a href="/changelog/">Changelog</a></li>
+          <li><a href="/download/#requirements">System requirements</a></li>
+        </ul>
+      </nav>
+      <nav aria-labelledby="f-docs">
+        <h2 id="f-docs">Docs</h2>
+        <ul>
+          <li><a href="/docs/">Docs home</a></li>
+          <li><a href="/docs/getting-started/install/">Getting started</a></li>
+          <li><a href="/docs/reference/your-data/">Your data and backups</a></li>
+          <li><a href="/docs/reference/keyboard-shortcuts/">Keyboard shortcuts</a></li>
+        </ul>
+      </nav>
+      <nav aria-labelledby="f-support">
+        <h2 id="f-support">Support</h2>
+        <ul>
+          <li><a href="/support/">Help and FAQ</a></li>
+          <li><a href="/support/troubleshooting/">Troubleshooting</a></li>
+          <li><a href="/support/report-a-bug/">Report a bug</a></li>
+          <li><a href="/support/#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <nav aria-labelledby="f-legal">
+        <h2 id="f-legal">Legal</h2>
+        <ul>
+          <li><a href="/privacy/">Privacy policy</a></li>
+          <li><a href="/terms/">Terms of service</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-base">
+      <span>&copy; {year} Itarin. Engram by Itarin.</span>
+      <span>{latest ? <>Latest version <span class="lcd">v{latest.version}</span></> : <>Desktop builds: <span class="lcd">coming soon</span></>}</span>
+      <span>This site uses no cookies, analytics or trackers.</span>
+    </div>
+  </div>
+</footer>

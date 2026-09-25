@@ -1,0 +1,11 @@
+---
+import { SITE, supportEmailSet } from '../config/site';
+interface Props { subject?: string }
+const { subject } = Astro.props;
+const href = supportEmailSet ? `mailto:${SITE.supportEmail}${subject ? `?subject=${encodeURIComponent(subject)}` : ''}` : '';
+---
+{supportEmailSet ? (
+  <a href={href}>{SITE.supportEmail}</a>
+) : (
+  <span class="placeholder" title="Set supportEmail in src/config/site.ts">[support email not set up yet]</span>
+)}

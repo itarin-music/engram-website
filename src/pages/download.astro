@@ -1,0 +1,299 @@
+---
+import Base from '../layouts/Base.astro';
+import {
+  latest, assetsFor, assetLabel, assetUrl, formatSize, formatDate, checksumsUrl, releasePageUrl,
+  PLATFORM_INFO, PLATFORMS_ORDER, USING_SAMPLE, type Platform,
+} from '../lib/releases';
+
+const r = latest;
+const has = (p: Platform) => !!r && assetsFor(r, p).length > 0;
+const primaryFor = (p: Platform) => (r ? assetsFor(r, p)[0] : undefined);
+const example = r ? (primaryFor('windows')?.file ?? r.assets[0]?.file) : 'Engram_<version>_x64-setup.exe';
+const exampleMac = r ? (primaryFor('macos')?.file ?? 'Engram_<version>_aarch64.dmg') : 'Engram_<version>_aarch64.dmg';
+const exampleLinux = r ? (primaryFor('linux')?.file ?? 'Engram_<version>_amd64.AppImage') : 'Engram_<version>_amd64.AppImage';
+const debFile = r?.assets.find((a) => a.format === 'deb')?.file ?? 'Engram_<version>_amd64.deb';
+const rpmFile = r?.assets.find((a) => a.format === 'rpm')?.file ?? 'Engram-<version>-1.x86_64.rpm';
+const appImage = r?.assets.find((a) => a.format === 'appimage')?.file ?? 'Engram_<version>_amd64.AppImage';
+
+// Data for the OS-detection script: the recommended file per platform.
+const recommended = Object.fromEntries(
+  PLATFORMS_ORDER.map((p) => {
+    const a = primaryFor(p);
+    return [p, a && r ? { url: assetUrl(r, a), label: assetLabel(a).title, size: formatSize(a.size) } : null];
+  }),
+);
+---
+<Base title="Download" description={r ? `Download Engram ${r.version} for Windows, macOS and Linux, with install steps, checksums and system requirements.` : 'Engram for Windows, macOS and Linux is coming soon. Install steps, system requirements and release details will appear here.'}>
+  <div class="wrap" data-pagefind-body>
+    <header class="page-head">
+      <span class="kicker">Download</span>
+      <h1>Download Engram</h1>
+      {r ? (
+        <p class="lead">
+          Version <span class="lcd">v{r.version}</span>, released {formatDate(r.date)}. Free, no account needed.{' '}
+          <a href="/changelog/">What's new</a>
+        </p>
+      ) : (
+        <p class="lead">Desktop installers for Windows, macOS and Linux are <span class="lcd">coming soon</span>. The first release hasn't been published yet, so there's nothing to download today.</p>
+      )}
+      {USING_SAMPLE && <p class="callout callout-warn"><strong>Sample data</strong>This build uses fake sample releases for testing. The versions, sizes and checksums below are not real.</p>}
+    </header>
+
+    {r && (
+      <section class="detected device" id="detected" hidden aria-live="polite">
+        <div>
+          <span class="kicker">Recommended for your computer</span>
+          <h2 class="detected-title" data-detected-title>Engram for your computer</h2>
+          <p class="muted" data-detected-note></p>
+        </div>
+        <div class="btn-row" data-detected-actions></div>
+      </section>
+    )}
+
+    <section class="section-tight" aria-labelledby="all-title">
+      <h2 id="all-title">{r ? 'All downloads' : 'Supported platforms'}</h2>
+      <div class="platforms">
+        {PLATFORMS_ORDER.map((p) => (
+          <article class="platform device" data-platform={p} aria-labelledby={`p-${p}`}>
+            <header>
+              <h3 id={`p-${p}`}>{PLATFORM_INFO[p].name}</h3>
+              <p class="muted">{PLATFORM_INFO[p].short}</p>
+              <span class="lcd detected-badge" hidden>Your system</span>
+            </header>
+            {has(p) && r ? (
+              <ul class="assets">
+                {assetsFor(r, p).map((a) => {
+                  const l = assetLabel(a);
+                  return (
+                    <li class="asset">
+                      <div class="asset-main">
+                        <div>
+                          <div class="asset-title">{l.title}</div>
+                          <div class="muted asset-detail">{l.detail}</div>
+                        </div>
+                        <a class="btn btn-primary" href={assetUrl(r, a)} download>
+                          Download<span class="sr-only"> {l.title} for {PLATFORM_INFO[p].name}</span>
+                        </a>
+                      </div>
+                      <dl class="asset-meta">
+                        <div><dt>File</dt><dd><code>{a.file}</code></dd></div>
+                        <div><dt>Size</dt><dd>{formatSize(a.size)}</dd></div>
+                        <div><dt>Version</dt><dd>{r.version} ({formatDate(r.date)})</dd></div>
+                        <div class="sha"><dt>SHA-256</dt><dd><code>{a.sha256}</code></dd></div>
+                      </dl>
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : (
+              <div class="soon">
+                <span class="lcd">Coming soon</span>
+                <p class="muted">{r ? `This release doesn't include a ${PLATFORM_INFO[p].name} build.` : `The ${PLATFORM_INFO[p].name} build will appear here when the first release is published.`}</p>
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+      {r && <p class="muted small">All files are also listed on the <a href={releasePageUrl(r)}>release page</a>, with a <a href={checksumsUrl(r)}>SHA256SUMS.txt</a> checksum file. Older versions are in the <a href="/changelog/">changelog</a>.</p>}
+      <p class="muted small">Looking for a phone version? Engram is a desktop app for now. See the <a href="/support/#faq-general">FAQ</a>.</p>
+    </section>
+
+    <div class="prose-wide">
+      <section id="install" aria-labelledby="install-title">
+        <h2 id="install-title">Install Engram</h2>
+        <div class="callout">
+          <strong>About security warnings</strong>
+          Engram's installers are not code-signed yet. Code signing is a paid certificate that tells Windows and macOS who published an app. Without it, your computer warns you the first time you open Engram. That's expected, and the steps below show how to continue. If you want to be sure your file is genuine, <a href="#verify">check its SHA-256 checksum</a> first.
+        </div>
+
+        <h3 id="install-windows">Windows</h3>
+        <ol>
+          <li>Download the <strong>Installer (.exe)</strong>.</li>
+          <li>If your browser says the file "isn't commonly downloaded", choose <strong>Keep</strong>. In Microsoft Edge, open the <strong>...</strong> menu next to the download, choose <strong>Keep</strong>, then <strong>Show more</strong> and <strong>Keep anyway</strong>.</li>
+          <li>Open the downloaded file.</li>
+          <li>If a blue <strong>"Windows protected your PC"</strong> window appears (Microsoft Defender SmartScreen), click <strong>More info</strong>, check the publisher and file name, then click <strong>Run anyway</strong>.</li>
+          <li>Follow the installer's steps. When it finishes, open Engram from the Start menu.</li>
+        </ol>
+        <p>The <strong>.msi</strong> package works the same way and is mainly for IT-managed installs. Engram uses Microsoft Edge WebView2, which comes with Windows 11 and most up-to-date Windows 10 PCs. If it's missing, the installer downloads it for you, which needs an internet connection.</p>
+
+        <h3 id="install-macos">macOS</h3>
+        <ol>
+          <li>Download the <strong>.dmg</strong> for your Mac: <strong>Apple Silicon</strong> for Macs with an M-series chip, <strong>Intel</strong> for older Macs. To check, open the Apple menu and choose <strong>About This Mac</strong>.</li>
+          <li>Open the .dmg and drag <strong>Engram</strong> into the <strong>Applications</strong> folder.</li>
+          <li>Open Engram from Applications. macOS will say it can't verify the developer. Click <strong>Done</strong> (or <strong>Cancel</strong>).</li>
+          <li>Open <strong>System Settings</strong>, then <strong>Privacy &amp; Security</strong>. Scroll down to the message about Engram and click <strong>Open Anyway</strong>. Enter your password if asked.</li>
+          <li>Open Engram again and click <strong>Open</strong>. You only need to do this once.</li>
+        </ol>
+        <p>On macOS 14 (Sonoma) and earlier you can instead <strong>Control-click</strong> Engram in Applications, choose <strong>Open</strong>, then click <strong>Open</strong> again.</p>
+        <details class="more">
+          <summary>macOS says Engram "is damaged and can't be opened"</summary>
+          <p>This is a stricter form of the same warning for apps from outside the App Store. After you've <a href="#verify">checked the checksum</a>, open the <strong>Terminal</strong> app and run:</p>
+          <pre><code>xattr -dr com.apple.quarantine /Applications/Engram.app</code></pre>
+          <p>Then open Engram normally. This removes the "downloaded from the internet" flag from Engram only.</p>
+        </details>
+
+        <h3 id="install-linux">Linux</h3>
+        <p><strong>Debian, Ubuntu, Linux Mint, Pop!_OS (.deb):</strong> open the file with your software installer, or run:</p>
+        <pre><code>sudo apt install ./{debFile}</code></pre>
+        <p><strong>Fedora, openSUSE, RHEL (.rpm):</strong></p>
+        <pre><code>sudo dnf install ./{rpmFile}</code></pre>
+        <p><strong>AppImage (any distribution):</strong> make it executable, then run it.</p>
+        <pre><code>chmod +x {appImage}
+./{appImage}</code></pre>
+        <p>If the AppImage won't start on Ubuntu 22.04 or newer, install FUSE 2: <code>sudo apt install libfuse2</code> (on Ubuntu 24.04 the package is <code>libfuse2t64</code>).</p>
+      </section>
+
+      <section id="verify" aria-labelledby="verify-title">
+        <h2 id="verify-title">Check a download (optional)</h2>
+        <p>Each file's SHA-256 checksum is listed above. If the checksum of the file you downloaded matches, the file is exactly what was published. Run one of these in the folder where the file is, then compare the result with the checksum on this page.</p>
+        <p><strong>Windows (PowerShell):</strong></p>
+        <pre><code>{`Get-FileHash .\\${example} -Algorithm SHA256`}</code></pre>
+        <p><strong>macOS (Terminal):</strong></p>
+        <pre><code>shasum -a 256 {exampleMac}</code></pre>
+        <p><strong>Linux:</strong></p>
+        <pre><code>sha256sum {exampleLinux}</code></pre>
+      </section>
+
+      <section id="requirements" aria-labelledby="req-title">
+        <h2 id="req-title">System requirements</h2>
+        <table>
+          <thead><tr><th scope="col">System</th><th scope="col">Needs</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Windows</th><td>Windows 10 or 11, 64-bit (x64). Microsoft Edge WebView2 Runtime (included with Windows 11; the installer adds it if missing).</td></tr>
+            <tr><th scope="row">macOS</th><td>macOS 10.15 (Catalina) or later, on Apple Silicon or Intel.</td></tr>
+            <tr><th scope="row">Linux</th><td>64-bit x86 (x86_64) with WebKitGTK 4.1, which is available on Ubuntu 22.04, Debian 12, Fedora 37 and newer.</td></tr>
+            <tr><th scope="row">Screen</th><td>At least 1024 by 640 pixels for the app window.</td></tr>
+            <tr><th scope="row">Disk</th><td>The app itself is small (see the file sizes above). Leave room for your notes and any media you import.</td></tr>
+            <tr><th scope="row">Internet</th><td>Not needed for normal use. Only the optional AI tutor, online AI providers and the tutor subscription need a connection.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="update" aria-labelledby="update-title">
+        <h2 id="update-title">Update Engram</h2>
+        <p>Engram doesn't update itself or check for updates in the background. To update:</p>
+        <ol>
+          <li>Close Engram.</li>
+          <li>Download the newest version from this page.</li>
+          <li>Install it the same way as before, over the old version. On macOS, drag it into Applications and choose <strong>Replace</strong>. With an AppImage, replace the old file with the new one.</li>
+        </ol>
+        <p>Your notes, cards and settings are kept, because they live in your vault folders, not in the app. Making a <a href="/docs/reference/your-data/#back-up">backup</a> first is still a good habit. See the <a href="/changelog/">changelog</a> for what changed.</p>
+      </section>
+
+      <section id="uninstall" aria-labelledby="uninstall-title">
+        <h2 id="uninstall-title">Uninstall Engram</h2>
+        <p><strong>Uninstalling never deletes your notes or cards.</strong> They stay in your vault folders (by default <code>Documents/Engram</code>) until you delete those yourself.</p>
+        <ul>
+          <li><strong>Windows:</strong> open <strong>Settings</strong>, then <strong>Apps</strong>, then <strong>Installed apps</strong>. Find Engram, open its <strong>...</strong> menu and choose <strong>Uninstall</strong>.</li>
+          <li><strong>macOS:</strong> drag <strong>Engram</strong> from Applications to the Trash.</li>
+          <li><strong>Linux:</strong> <code>sudo apt remove engram</code> (.deb), <code>sudo dnf remove engram</code> (.rpm), or delete the AppImage file.</li>
+        </ul>
+        <p>Engram also keeps a small amount of app data outside your vaults: your list of profiles, and your API key if you chose to remember it. If you're removing Engram for good and want that gone too, delete the app-data folder:</p>
+        <ul>
+          <li><strong>Windows:</strong> <code>%LOCALAPPDATA%\app.itarin.engram</code></li>
+          <li><strong>macOS:</strong> <code>~/Library/WebKit/app.itarin.engram</code> and <code>~/Library/Caches/app.itarin.engram</code></li>
+          <li><strong>Linux:</strong> <code>~/.local/share/app.itarin.engram</code></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <script is:inline type="application/json" id="dl-data" set:html={JSON.stringify(recommended)}></script>
+  <script is:inline>
+    (function () {
+      // Detect the visitor's OS to highlight the matching download. Nothing leaves the browser.
+      var ua = navigator.userAgent || '';
+      var uad = navigator.userAgentData;
+      var plat = (uad && uad.platform) || navigator.platform || '';
+      var os = null;
+      if (/Android|iPhone|iPad|iPod/i.test(ua) || (/Mac/.test(plat) && navigator.maxTouchPoints > 1)) os = 'mobile';
+      else if (/Win/i.test(plat) || /Windows/i.test(ua)) os = 'windows';
+      else if (/Mac/i.test(plat) || /Mac OS X/i.test(ua)) os = 'macos';
+      else if (/Linux|X11|CrOS/i.test(plat + ' ' + ua)) os = 'linux';
+      if (!os) return;
+      document.documentElement.dataset.os = os;
+
+      var card = document.querySelector('[data-platform="' + os + '"]');
+      if (card) { card.classList.add('is-detected'); var b = card.querySelector('.detected-badge'); if (b) b.hidden = false; card.parentNode.insertBefore(card, card.parentNode.firstChild); }
+
+      var box = document.getElementById('detected');
+      var dataEl = document.getElementById('dl-data');
+      if (!box || !dataEl) return;
+      var data = JSON.parse(dataEl.textContent || '{}');
+      var names = { windows: 'Windows', macos: 'macOS', linux: 'Linux' };
+      var title = box.querySelector('[data-detected-title]');
+      var note = box.querySelector('[data-detected-note]');
+      var actions = box.querySelector('[data-detected-actions]');
+      function btn(href, text, primary) { var a = document.createElement('a'); a.className = 'btn btn-lg' + (primary ? ' btn-primary' : ''); a.href = href; a.textContent = text; return a; }
+
+      if (os === 'mobile') {
+        title.textContent = 'Engram is a desktop app';
+        note.textContent = 'It runs on Windows, macOS and Linux computers. Visit this page on your computer to download it.';
+        box.hidden = false; return;
+      }
+      var rec = data[os];
+      if (!rec) {
+        title.textContent = 'No ' + names[os] + ' build in this release yet';
+        note.textContent = 'See all platforms below.';
+        box.hidden = false; return;
+      }
+      title.textContent = 'Engram for ' + names[os];
+      if (os === 'macos') {
+        note.textContent = 'Choose Apple Silicon for Macs with an M-series chip, or Intel for older Macs.';
+        var mac = document.querySelectorAll('[data-platform="macos"] .asset .btn');
+        mac.forEach(function (a, i) { actions.appendChild(btn(a.getAttribute('href'), i === 0 ? 'Download for Apple Silicon' : 'Download for Intel', i === 0)); });
+      } else {
+        note.textContent = rec.label + ', ' + rec.size + '.';
+        actions.appendChild(btn(rec.url, 'Download for ' + names[os], true));
+      }
+      actions.appendChild(btn('#install-' + os, 'How to install', false));
+      box.hidden = false;
+    })();
+  </script>
+</Base>
+
+<style>
+  .section-tight { padding: 1rem 0 2rem; }
+  .small { font-size: 0.92rem; }
+  .detected { padding: 1.5rem; margin-bottom: 2rem; display: grid; gap: 1rem; align-items: center; border-color: rgb(var(--accent) / 0.6); }
+  @media (min-width: 60rem) { .detected { grid-template-columns: 1fr auto; } }
+  .detected .kicker { display: block; margin-bottom: 0.4rem; }
+  .detected-title { font-size: 1.5rem; margin-bottom: 0.3rem; }
+  .detected p { margin: 0; }
+
+  .platforms { display: grid; gap: 1.25rem; margin-bottom: 1.5rem; }
+  @media (min-width: 64rem) { .platforms { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .platform { padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
+  .platform header { position: relative; }
+  .platform h3 { font-size: 1.3rem; margin-bottom: 0.2rem; }
+  .platform header p { margin: 0; font-size: 0.92rem; }
+  .detected-badge { position: absolute; top: 0; right: 0; }
+  .platform.is-detected { border-color: rgb(var(--accent)); box-shadow: 0 0 0 1px rgb(var(--accent)), 0 14px 34px -18px rgb(var(--glow) / 0.6); }
+
+  .assets { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+  .asset { border-top: 1px solid rgb(var(--line)); padding-top: 1rem; }
+  .asset-main { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: space-between; align-items: center; }
+  .asset-title { font-weight: 650; }
+  .asset-detail { font-size: 0.88rem; }
+  .asset-meta { margin: 0.8rem 0 0; display: grid; gap: 0.35rem; font-size: 0.85rem; }
+  .asset-meta div { display: grid; grid-template-columns: 5.2rem minmax(0, 1fr); gap: 0.5rem; }
+  .asset-meta dt { color: rgb(var(--ink-dim)); }
+  .asset-meta dd { margin: 0; min-width: 0; }
+  .asset-meta code { font-size: 0.8rem; overflow-wrap: anywhere; word-break: break-all; }
+  .soon { display: grid; gap: 0.6rem; justify-items: start; }
+  .soon p { margin: 0; }
+
+  .prose-wide { max-width: 50rem; }
+  .prose-wide section { padding-top: 2rem; }
+  .prose-wide h2 { margin-top: 1rem; }
+  .prose-wide h3 { margin-top: 1.8rem; }
+  .prose-wide ol, .prose-wide ul { padding-left: 1.4rem; }
+  .prose-wide li { margin: 0.35rem 0; }
+  .prose-wide pre { padding: 0.9rem 1rem; border-radius: 10px; background: rgb(var(--panel)); border: 1px solid rgb(var(--line)); overflow-x: auto; font-size: 0.88rem; }
+  .prose-wide code:not(pre code) { font-size: 0.88em; padding: 0.1rem 0.35rem; border-radius: 5px; background: rgb(var(--panel-2)); overflow-wrap: anywhere; }
+  .prose-wide table { width: 100%; border-collapse: collapse; }
+  .prose-wide th, .prose-wide td { text-align: left; padding: 0.6rem 0.7rem; border-bottom: 1px solid rgb(var(--line)); vertical-align: top; }
+  .prose-wide tbody th { width: 7rem; }
+  .more { border: 1px solid rgb(var(--line)); border-radius: 10px; padding: 0 1rem; background: rgb(var(--panel) / 0.6); }
+  .more summary { cursor: pointer; padding: 0.8rem 0; font-weight: 600; }
+</style>
