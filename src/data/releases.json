@@ -12,16 +12,16 @@
           "arch": "x64",
           "format": "rpm",
           "file": "Engram-0.2.1-1.x86_64.rpm",
-          "size": 10190624,
-          "sha256": "355b103557cb651df1d3d9d612f65b25a4fd16a592e2707c8d5387d9d3dcea78"
+          "size": 10190625,
+          "sha256": "cf55686cbc0ec38b6b855eb3143dcbc645df8fa227d419ecf787fd7b25871d36"
         },
         {
           "platform": "macos",
           "arch": "aarch64",
           "format": "dmg",
           "file": "Engram_0.2.1_aarch64.dmg",
-          "size": 9509082,
-          "sha256": "d53e693c7dccb0e8bc7c118bded231d3238f843c8a13c767c5cae7b807dbd4c5"
+          "size": 9509086,
+          "sha256": "b91b315a790049f5fc38f3da447081c5eced947edb8e459cc407c6550216d934"
         },
         {
           "platform": "linux",
@@ -29,31 +29,31 @@
           "format": "appimage",
           "file": "Engram_0.2.1_amd64.AppImage",
           "size": 85232120,
-          "sha256": "a2531fc4a102011d5bafa8b5d0cbc3732c4e0907feb2df7bda87ad6b46a02de4"
+          "sha256": "7a223232e8dc4bd407bfb190d04b2a85850d95d0209ff1674320b34dec944e5d"
         },
         {
           "platform": "linux",
           "arch": "x64",
           "format": "deb",
           "file": "Engram_0.2.1_amd64.deb",
-          "size": 10190740,
-          "sha256": "77a39a94145b8edaa7b2b21505c77841137e51903325b7f077c2bad98a9eb86c"
+          "size": 10190754,
+          "sha256": "b9747d820fb21107c88926101504b31ef7af8b5f1cdfecb67d8e727e9635d6f3"
         },
         {
           "platform": "windows",
           "arch": "x64",
           "format": "exe",
           "file": "Engram_0.2.1_x64-setup.exe",
-          "size": 6884069,
-          "sha256": "31fcb84f75c9a21ac67d743ca0b414c8d03b97e884acce3eea2d83e5076a8700"
+          "size": 6883405,
+          "sha256": "ccc5309fa2527ca977382e5dade107d64c8f5dc3946d8bafe4667c80fedee362"
         },
         {
           "platform": "macos",
           "arch": "x64",
           "format": "dmg",
           "file": "Engram_0.2.1_x64.dmg",
-          "size": 9795510,
-          "sha256": "d7f05180aca3d94001b91d329806fbb5bd535b627a909bdcc18b82b6d8ac3ba0"
+          "size": 9795502,
+          "sha256": "f852508e1493b7bc8665d26a91613550a0c17e736f5a8f66b0ded3a2890e237f"
         },
         {
           "platform": "windows",
@@ -61,7 +61,7 @@
           "format": "msi",
           "file": "Engram_0.2.1_x64_en-US.msi",
           "size": 9355264,
-          "sha256": "2407547f071107c382050fa38edf47f9a4137894dbd158e8d492b76d3bfec790"
+          "sha256": "01d1a4eef9bc8db07f8efd21956d758b6636400336050abe3e3643681e4e3032"
         }
       ]
     },
