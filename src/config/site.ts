@@ -23,13 +23,24 @@ export const SITE = {
    * The app's source repository stays private; see RELEASING.md in the app repo.
    */
   releasesRepo: 'itarin-music/engram-releases',
+
+  /**
+   * BILLING URL: the Cloud backup subscription's Cloudflare Worker backend (the same one the app
+   * talks to — see engram-app/server/ and its README, "Setting up cloud backup"). Not a secret:
+   * it's the same public URL already committed in the app's own .env.local. While empty, the
+   * /subscription/ page shows a plain "not set up yet" message instead of a sign-in form.
+   */
+  billingUrl: 'https://engram-billing.itarin-engram.workers.dev',
 } as const;
+
+export const billingConfigured = SITE.billingUrl.trim().length > 0;
 
 export const supportEmailSet = SITE.supportEmail.trim().length > 0;
 
 /** Main navigation, used by the header and the footer. */
 export const NAV = [
   { href: '/download/', label: 'Download' },
+  { href: '/subscription/', label: 'Subscription' },
   { href: '/docs/', label: 'Docs' },
   { href: '/support/', label: 'Support' },
   { href: '/changelog/', label: 'Changelog' },

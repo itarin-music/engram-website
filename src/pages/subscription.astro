@@ -1,0 +1,202 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE, billingConfigured } from '../config/site';
+---
+<Base title="Subscription" description="Cloud backup is Engram's one paid feature: what it costs, what it does, and how to sign in and manage it from your browser.">
+  <div class="wrap" data-pagefind-body>
+    <header class="page-head">
+      <span class="kicker">Subscription</span>
+      <h1>Cloud backup subscription</h1>
+      <p class="lead">
+        The tutor chat is free — bring your own API key or a local model, no sign-in needed. Engram's one paid feature is <strong>Cloud backup</strong>:
+        a manual snapshot of one profile's notes and database that you can restore on another computer. <span class="lcd">$5/month</span> <span class="lcd">first month free</span>
+      </p>
+    </header>
+
+    <section class="section-tight">
+      <h2>What you get</h2>
+      <ul>
+        <li><strong>Back up now</strong> zips this profile's notes and its whole local database and uploads them, replacing whatever was stored before.</li>
+        <li><strong>Restore from backup</strong> downloads that snapshot and replaces everything on the current computer with it — for moving to a new machine or recovering after reinstalling.</li>
+        <li>One slot, not live sync: no version history, no merging, nothing automatic. It only runs when you press the button.</li>
+      </ul>
+      <p class="muted">See the full <a href="/docs/features/cloud-backup/">Cloud backup docs</a> for details, or <a href="/docs/features/tutor/">AI tutor</a> for the free chat feature this has nothing to do with.</p>
+    </section>
+
+    <section class="section-tight" aria-labelledby="account-title">
+      <h2 id="account-title">Your subscription</h2>
+
+      {!billingConfigured && (
+        <div class="callout callout-warn">
+          <strong>Not set up yet</strong>
+          This site isn't pointed at a billing server, so subscribing isn't available here. Sign in and subscribe from the Engram app instead — Settings, Backup.
+        </div>
+      )}
+
+      {billingConfigured && (
+        <div class="device" id="sub-app" style="padding:1.25rem 1.4rem;max-width:32rem">
+          <p class="muted" id="sub-loading">Checking your status…</p>
+
+          <div id="sub-email-form" hidden>
+            <p class="muted" style="margin-top:0">A one-time code by email, nothing else. This only matches your subscription to this browser; it isn't a study profile.</p>
+            <div class="field-row">
+              <input class="field" type="email" id="sub-email" autocomplete="email" placeholder="you@example.com" />
+              <button class="btn btn-primary" type="button" id="sub-send-code">Send code</button>
+            </div>
+          </div>
+
+          <div id="sub-code-form" hidden>
+            <p class="muted" style="margin-top:0">Enter the code emailed to <strong id="sub-code-email"></strong>.</p>
+            <div class="field-row">
+              <input class="field" type="text" inputmode="numeric" id="sub-code" placeholder="123456" style="max-width:8rem;font-family:var(--font-mono)" />
+              <button class="btn btn-primary" type="button" id="sub-verify">Verify</button>
+              <button class="btn" type="button" id="sub-resend">Resend code</button>
+            </div>
+          </div>
+
+          <div id="sub-account" hidden>
+            <div class="btn-row" style="margin-bottom:0.75rem">
+              <span class="lcd" id="sub-account-email"></span>
+              <span class="lcd" id="sub-account-status"></span>
+            </div>
+            <p class="muted" id="sub-status-note" hidden></p>
+            <div class="btn-row">
+              <button class="btn btn-primary" type="button" id="sub-subscribe" hidden>Start free month</button>
+              <button class="btn" type="button" id="sub-manage">Manage subscription</button>
+              <button class="btn" type="button" id="sub-refresh">Refresh status</button>
+              <button class="btn btn-lg" type="button" id="sub-signout" style="min-height:2.75rem;padding:0.55rem 1.1rem;font-size:0.95rem;font-weight:600">Use a different email</button>
+            </div>
+          </div>
+
+          <p class="muted" id="sub-error" style="color:rgb(var(--bad));" hidden></p>
+        </div>
+      )}
+    </section>
+  </div>
+</Base>
+
+{billingConfigured && (
+  <script define:vars={{ billingUrl: SITE.billingUrl }}>
+    const STORAGE_KEY = 'engram-web-subscription-auth';
+    const STATUS_LABEL = { active: 'Active', past_due: 'Past due', canceled: 'Canceled', inactive: 'Not subscribed' };
+    const STATUS_NOTE = {
+      past_due: 'Your last payment did not go through. Update your card in Manage subscription to keep backup unlocked.',
+      canceled: 'Your subscription ended. Subscribe again any time to unlock backup.',
+    };
+
+    const $ = (id) => document.getElementById(id);
+    const els = {
+      loading: $('sub-loading'), emailForm: $('sub-email-form'), codeForm: $('sub-code-form'), account: $('sub-account'),
+      email: $('sub-email'), code: $('sub-code'), codeEmail: $('sub-code-email'),
+      sendCode: $('sub-send-code'), verify: $('sub-verify'), resend: $('sub-resend'),
+      accountEmail: $('sub-account-email'), accountStatus: $('sub-account-status'), statusNote: $('sub-status-note'),
+      subscribe: $('sub-subscribe'), manage: $('sub-manage'), refresh: $('sub-refresh'), signout: $('sub-signout'),
+      error: $('sub-error'),
+    };
+
+    function loadAuth() {
+      try { const raw = localStorage.getItem(STORAGE_KEY); return raw ? JSON.parse(raw) : {}; } catch { return {}; }
+    }
+    function saveAuth(a) { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(a)); } catch { /* best effort */ } }
+    function clearAuth() { try { localStorage.removeItem(STORAGE_KEY); } catch { /* ignore */ } }
+
+    // Display only — this is not a security boundary. Nothing on this page unlocks anything; it
+    // only shows status and hands off to Stripe. The app is what verifies the signature.
+    function decodeClaims(jwt) {
+      try {
+        const b64 = jwt.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
+        const json = atob(b64 + '='.repeat((4 - (b64.length % 4)) % 4));
+        return JSON.parse(json);
+      } catch { return null; }
+    }
+
+    async function api(path, opts) {
+      let res;
+      try { res = await fetch(billingUrl + path, { ...opts, headers: { 'Content-Type': 'application/json', ...(opts?.headers ?? {}) } }); }
+      catch (e) { throw new Error('Could not reach the billing server. ' + (e?.message ?? e)); }
+      let body = null;
+      try { body = await res.json(); } catch { /* empty body */ }
+      if (!res.ok) throw new Error(body?.error ?? (res.status + ' ' + res.statusText));
+      return body;
+    }
+
+    function showError(e) { els.error.hidden = false; els.error.textContent = e instanceof Error ? e.message : String(e); }
+    function clearError() { els.error.hidden = true; els.error.textContent = ''; }
+
+    function showForm(which) {
+      els.loading.hidden = true;
+      els.emailForm.hidden = which !== 'email';
+      els.codeForm.hidden = which !== 'code';
+      els.account.hidden = which !== 'account';
+    }
+
+    function renderAccount(email, claims) {
+      const status = claims?.status ?? 'inactive';
+      els.accountEmail.textContent = email;
+      els.accountStatus.textContent = STATUS_LABEL[status] ?? status;
+      els.accountStatus.classList.toggle('lcd-warn', status !== 'active');
+      if (STATUS_NOTE[status]) { els.statusNote.hidden = false; els.statusNote.textContent = STATUS_NOTE[status]; }
+      else { els.statusNote.hidden = true; }
+      els.subscribe.hidden = status === 'active';
+      showForm('account');
+    }
+
+    async function refresh() {
+      const auth = loadAuth();
+      if (!auth.sessionToken || !auth.email) { showForm('email'); return; }
+      try {
+        const { entitlementJwt } = await api('/entitlement', { headers: { Authorization: 'Bearer ' + auth.sessionToken } });
+        const claims = decodeClaims(entitlementJwt);
+        renderAccount(auth.email, claims);
+      } catch (e) {
+        if (e instanceof Error && /401|Sign in again/.test(e.message)) { clearAuth(); showForm('email'); }
+        else { showForm('account'); showError(e); }
+      }
+    }
+
+    els.sendCode.addEventListener('click', async () => {
+      const email = els.email.value.trim();
+      if (!email) return;
+      clearError(); els.sendCode.setAttribute('aria-disabled', 'true');
+      try { await api('/auth/code', { method: 'POST', body: JSON.stringify({ email }) }); els.codeEmail.textContent = email; showForm('code'); }
+      catch (e) { showError(e); }
+      finally { els.sendCode.removeAttribute('aria-disabled'); }
+    });
+
+    els.resend.addEventListener('click', () => els.sendCode.click());
+
+    els.verify.addEventListener('click', async () => {
+      const email = els.codeEmail.textContent, code = els.code.value.trim();
+      if (!code) return;
+      clearError(); els.verify.setAttribute('aria-disabled', 'true');
+      try {
+        const { sessionToken, entitlementJwt } = await api('/auth/verify', { method: 'POST', body: JSON.stringify({ email, code }) });
+        saveAuth({ email, sessionToken });
+        renderAccount(email, decodeClaims(entitlementJwt));
+      } catch (e) { showError(e); }
+      finally { els.verify.removeAttribute('aria-disabled'); }
+    });
+
+    els.subscribe.addEventListener('click', async () => {
+      const auth = loadAuth();
+      clearError();
+      try { const { url } = await api('/billing/checkout', { method: 'POST', headers: { Authorization: 'Bearer ' + auth.sessionToken } }); window.open(url, '_blank', 'noopener'); }
+      catch (e) { showError(e); }
+    });
+
+    els.manage.addEventListener('click', async () => {
+      const auth = loadAuth();
+      clearError();
+      try { const { url } = await api('/billing/portal', { method: 'POST', headers: { Authorization: 'Bearer ' + auth.sessionToken } }); window.open(url, '_blank', 'noopener'); }
+      catch (e) { showError(e); }
+    });
+
+    els.refresh.addEventListener('click', () => { clearError(); void refresh(); });
+    els.signout.addEventListener('click', () => { clearAuth(); clearError(); els.email.value = ''; els.code.value = ''; showForm('email'); });
+
+    // Checkout/Portal open in a new tab; when the visitor comes back to this one, pick up any change.
+    window.addEventListener('focus', () => { if (loadAuth().sessionToken) void refresh(); });
+
+    void refresh();
+  </script>
+)}

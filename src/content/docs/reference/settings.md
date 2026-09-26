@@ -16,11 +16,11 @@ Open **Settings / About** from the bottom of the sidebar. It has four tabs.
 
 ## Tutor & API key
 
-Connects the AI provider used by the tutor chat and by AI-written quizzes: provider, model, API address, API key, default mode, creativity and extra instructions. See [AI tutor](/docs/features/tutor/#connect-an-ai-provider).
+Connects the AI provider used by the free tutor chat and by AI-written quizzes: provider, model, API address, API key, default mode, creativity and extra instructions. See [AI tutor](/docs/features/tutor/#connect-an-ai-provider).
 
-## Plan
+## Backup
 
-Shows your tutor add-on: sign in with your email, start the free month, check your status, or open **Manage subscription**. **Use a different email** signs this computer out of the subscription. See [AI tutor](/docs/features/tutor/#subscribe).
+One-slot cloud backup: **Back up now** / **Restore from backup**, plus signing in with your email, starting the free month, checking your status, or opening **Manage subscription**. **Use a different email** signs this computer out. See [Cloud backup](/docs/features/cloud-backup/).
 
 ## About
 

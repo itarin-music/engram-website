@@ -15,7 +15,7 @@ Quizzes test you on material in a different way from flashcards. Engram builds t
 3. Pick how many questions (5, 10, 15 or 20) and the type: **Mixed**, **Multiple choice** or **Short answer**.
 4. Pick a **Generator**:
    - **Built-in (offline, from your cards/notes)** works with no internet and no AI. It finds facts in your material, such as card fronts and backs, `Term: definition` lines, bold terms and cloze cards, and turns them into questions.
-   - **Tutor model (needs API key)** asks the AI provider you set up to write the questions. This is free in Engram (it doesn't need the tutor subscription), but it does need a provider set up in **Settings, Tutor & API key**. See [AI tutor](/docs/features/tutor/#connect-an-ai-provider).
+   - **Tutor model (needs API key)** asks the AI provider you set up to write the questions. This is free in Engram, but it does need a provider set up in **Settings, Tutor & API key**. See [AI tutor](/docs/features/tutor/#connect-an-ai-provider).
 5. Press **Generate quiz**.
 
 The built-in generator needs enough material: at least 3 usable cards in a deck, or a note or text with at least 3 facts it can find. Pasted text needs at least a few sentences.

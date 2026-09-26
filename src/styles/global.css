@@ -99,6 +99,15 @@ kbd, .kbd { font-family: var(--font-mono); font-size: 0.8em; padding: 0.05rem 0.
 .btn[aria-disabled='true'] { opacity: 0.55; cursor: not-allowed; pointer-events: none; }
 .btn-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
 
+/* ---------- form fields (subscription sign-in) ---------- */
+.field {
+  min-height: 2.75rem; padding: 0.5rem 0.8rem; border-radius: 11px; font: inherit; font-size: 0.95rem;
+  color: rgb(var(--ink)); background: rgb(var(--panel-2)); border: 1px solid rgb(var(--line));
+}
+.field:focus-visible { outline: 2px solid rgb(var(--accent)); outline-offset: 1px; }
+.field-row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.field-row .field { flex: 1 1 14rem; }
+
 /* ---------- header ---------- */
 .site-header { position: sticky; top: 0; z-index: 50; border-bottom: 1px solid rgb(var(--line) / 0.7); background: rgb(var(--bg) / 0.86); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
 .site-header .wrap { display: flex; align-items: center; gap: 1rem; min-height: 4rem; }

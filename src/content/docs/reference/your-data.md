@@ -30,7 +30,7 @@ A few things are stored by the app itself rather than in a vault:
 - the list of your profiles and where their folders are
 - the name Engram greets you with
 - your AI provider API key, if you ticked **Remember on this device**
-- your tutor add-on sign-in
+- your Cloud backup subscription sign-in (see below)
 
 These are small and easy to set up again, so the vault folders are what matter for backups.
 
@@ -41,7 +41,7 @@ These are small and easy to set up again, so the vault folders are what matter f
 
 Copy the whole folder, including the hidden `.engram` folder inside it. Copying the vault folder itself (rather than the files inside it) takes care of this. On a Mac, press <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>.</kbd> in Finder to show hidden folders if you want to check.
 
-Do this regularly. Engram doesn't make backups for you.
+Do this regularly. Engram doesn't make backups for you — unless you'd rather have a one-button version: [Cloud backup](/docs/features/cloud-backup/) is a paid add-on ($5/month, first month free) that zips a profile's notes and database and stores them for you, restorable from any computer.
 
 > **About sync services:** keeping a vault inside a synced folder (such as OneDrive, iCloud Drive or Dropbox) works as a backup, but only use one computer at a time and let the sync finish before opening Engram elsewhere. Two computers editing the same database at once can conflict.
 

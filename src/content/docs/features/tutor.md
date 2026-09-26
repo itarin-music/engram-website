@@ -1,6 +1,6 @@
 ---
 title: AI tutor
-description: Chat with an AI tutor about your notes and cards, using your own AI provider or a free local model. Paid add-on, first month free.
+description: Chat with an AI tutor about your notes and cards, using your own AI provider or a free local model. Free, no subscription.
 order: 7
 ---
 
@@ -12,12 +12,9 @@ The screenshot shows a real Engram chat screen. The reply comes from a test mode
 
 ## What you need
 
-The tutor needs two separate things:
+The tutor chat is free — no subscription, no sign-in, no Engram account. All it needs is **an AI provider**: Engram doesn't include an AI model, so you connect one yourself, either an online service with an API key (such as OpenAI or OpenRouter, which charge you for usage) or a free model running on your own computer (LM Studio or Ollama, no key needed).
 
-1. **The tutor add-on.** The chat screen is Engram's one paid feature: **$5 a month, with the first month free**. You can cancel any time.
-2. **An AI provider.** Engram doesn't include an AI model. You connect one yourself, either an online service with an API key (such as OpenAI or OpenRouter, which charge you for usage) or a free model running on your own computer (LM Studio or Ollama, no key needed).
-
-Everything else in Engram is free and works without either one. That includes AI-written quizzes, which only need the provider.
+Everything else in Engram is free too, including AI-written quizzes, which only need the same provider.
 
 ## Connect an AI provider
 
@@ -44,23 +41,7 @@ Local models run entirely on your computer and don't need an internet connection
 - Tick **Remember on this device** to keep it between launches. It's then saved in Engram's app storage on this computer, **in plain text**, so only do this on a computer you trust.
 - The key is never written to your notes folder or database, and it's only ever sent to the provider you chose.
 
-## Subscribe
-
-1. Open **Chat** (or **Settings, Plan**).
-2. Enter your email and press **Send code**. Engram emails you a one-time code, which expires after 10 minutes.
-3. Enter the code and press **Verify**.
-4. Press **Start free month**. Stripe's secure checkout opens in your web browser.
-5. Finish checkout, then come back to Engram. It checks automatically. You can also press **I've paid, check now**.
-
-Your email is only used to match your subscription to your computer. It isn't a study profile and has nothing to do with your notes.
-
-### Manage or cancel
-
-**Manage subscription** (in Chat or **Settings, Plan**) opens Stripe's customer portal in your browser, where you can update your card or cancel. If you cancel, the tutor stays unlocked until the end of the period you've paid for.
-
-### Offline
-
-Engram re-checks your subscription in the background about every 12 hours while it's open. If it can't reach the subscription server (for example, you're offline), the tutor keeps working for up to 4 days since the last successful check, then locks until Engram can check again.
+Engram's one paid feature is [Cloud backup](/docs/features/cloud-backup/), a separate, optional add-on for backing up your profile — it has nothing to do with the tutor chat.
 
 ## Chatting
 
