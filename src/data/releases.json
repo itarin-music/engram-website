@@ -1,4 +1,29 @@
 {
   "$comment": "Single source of release info for the whole site. Do not edit by hand: run `npm run release:import -- vX.Y.Z` after publishing a release. An empty list shows the 'coming soon' state everywhere.",
-  "releases": []
+  "releases": [
+    {
+      "version": "0.1.0",
+      "tag": "v0.1.0",
+      "date": "2026-09-26",
+      "notes": "First public release.\n\n- Notes, flashcards with spaced repetition, quizzes, a code sandbox and study timers, all local-first: everything lives in plain files on your computer.\n- Import from Obsidian, Notion, Roam, Logseq, Bear, Apple Notes, Anki (.apkg) or a spreadsheet/CSV export.\n- Optional paid tutor add-on (bring your own OpenAI-compatible API key, or run a free local model) and optional cloud backup, both $5/month after a free first month. Everything else is free forever.\n- Windows only for this first release; macOS and Linux builds are planned.",
+      "assets": [
+        {
+          "platform": "windows",
+          "arch": "x64",
+          "format": "exe",
+          "file": "Engram_0.1.0_x64-setup.exe",
+          "size": 6522721,
+          "sha256": "63c63d051ebfebcaebb03cc748f68d3a6d73d1100ad601a58981dc570213caf6"
+        },
+        {
+          "platform": "windows",
+          "arch": "x64",
+          "format": "msi",
+          "file": "Engram_0.1.0_x64_en-US.msi",
+          "size": 8654848,
+          "sha256": "823ed56c3da24af8fe5c7ffece5f1f61fbdfa39e5e6c24817d8ed624dfbc4ef4"
+        }
+      ]
+    }
+  ]
 }
