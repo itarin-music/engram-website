@@ -2,6 +2,70 @@
   "$comment": "Single source of release info for the whole site. Do not edit by hand: run `npm run release:import -- vX.Y.Z` after publishing a release. An empty list shows the 'coming soon' state everywhere.",
   "releases": [
     {
+      "version": "0.2.0",
+      "tag": "v0.2.0",
+      "date": "2026-09-26",
+      "notes": "- **macOS and Linux builds, at last.** Releases are now built automatically by\n  GitHub Actions for Windows, Linux, and macOS (both Apple Silicon and Intel)\n  every time a version tag is pushed, instead of only what could be built on\n  a Windows machine by hand.\n- **Cloud backup**: manually back up and restore a profile snapshot from\n  Settings → Backup (gated behind the same plan as the AI tutor).\n- **General notes importer** replaces the Obsidian-specific one, with\n  broader compatibility.\n- Fixed a bug where closing one database connection could silently close\n  every other open profile's connection too, breaking Import with\n  \"attempted to acquire a connection on a closed pool\".\n- Fixed the sidebar version badge overflowing its box.\n- Entitlement verification now uses the real signing key end-to-end.",
+      "assets": [
+        {
+          "platform": "linux",
+          "arch": "x64",
+          "format": "rpm",
+          "file": "Engram-0.2.0-1.x86_64.rpm",
+          "size": 9344985,
+          "sha256": "343f8d5de70a67b17d3a75e8bd6aa5a63f1d925b164e678716f75758b13fe3a8"
+        },
+        {
+          "platform": "macos",
+          "arch": "aarch64",
+          "format": "dmg",
+          "file": "Engram_0.2.0_aarch64.dmg",
+          "size": 8791051,
+          "sha256": "955768d40630c60001001746ed3e7a9747a3786ccc8613acbf1a24c158041240"
+        },
+        {
+          "platform": "linux",
+          "arch": "x64",
+          "format": "appimage",
+          "file": "Engram_0.2.0_amd64.AppImage",
+          "size": 84482552,
+          "sha256": "a64ddd93c6e6948f0b5ad9027b1c3574e420382b5fca3e557227a8a93b86c94c"
+        },
+        {
+          "platform": "linux",
+          "arch": "x64",
+          "format": "deb",
+          "file": "Engram_0.2.0_amd64.deb",
+          "size": 9344904,
+          "sha256": "e46081bb1234dc65e4a59919dfd4b7b3f87ef93822ed13d7850f3d46d6f7df46"
+        },
+        {
+          "platform": "windows",
+          "arch": "x64",
+          "format": "exe",
+          "file": "Engram_0.2.0_x64-setup.exe",
+          "size": 6518250,
+          "sha256": "bb674344b5b9abbed35409e1e165f97bb560d640f7be53ffd66f0ad7c8195c44"
+        },
+        {
+          "platform": "macos",
+          "arch": "x64",
+          "format": "dmg",
+          "file": "Engram_0.2.0_x64.dmg",
+          "size": 9049344,
+          "sha256": "ec66651a131f8ae829dd9ca41ac78b0b67823dedca8520946310f27564eff377"
+        },
+        {
+          "platform": "windows",
+          "arch": "x64",
+          "format": "msi",
+          "file": "Engram_0.2.0_x64_en-US.msi",
+          "size": 8667136,
+          "sha256": "506af85df6cbc4a8dfa89c93441496698f89ef4db4b8222e6b115c969d194948"
+        }
+      ]
+    },
+    {
       "version": "0.1.0",
       "tag": "v0.1.0",
       "date": "2026-09-26",
