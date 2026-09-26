@@ -2,6 +2,70 @@
   "$comment": "Single source of release info for the whole site. Do not edit by hand: run `npm run release:import -- vX.Y.Z` after publishing a release. An empty list shows the 'coming soon' state everywhere.",
   "releases": [
     {
+      "version": "0.2.1",
+      "tag": "v0.2.1",
+      "date": "2026-09-26",
+      "notes": "- **In-app update checks.** Engram can now check for new versions on its own and notify you right in the app — no more finding out about updates by chance. Checking happens automatically in the background and never installs anything without you clicking \"Update now.\"\n- **Snooze for 90 days.** If you'd rather not be bothered, dismissing an update prompt with the checkbox checked keeps Engram quiet about updates for 90 days. Updating is always optional.\n- Manual \"Check for updates\" button added to Settings → About.\n- Release artifacts are now cryptographically signed, which is what makes the above possible.",
+      "assets": [
+        {
+          "platform": "linux",
+          "arch": "x64",
+          "format": "rpm",
+          "file": "Engram-0.2.1-1.x86_64.rpm",
+          "size": 10190624,
+          "sha256": "355b103557cb651df1d3d9d612f65b25a4fd16a592e2707c8d5387d9d3dcea78"
+        },
+        {
+          "platform": "macos",
+          "arch": "aarch64",
+          "format": "dmg",
+          "file": "Engram_0.2.1_aarch64.dmg",
+          "size": 9509082,
+          "sha256": "d53e693c7dccb0e8bc7c118bded231d3238f843c8a13c767c5cae7b807dbd4c5"
+        },
+        {
+          "platform": "linux",
+          "arch": "x64",
+          "format": "appimage",
+          "file": "Engram_0.2.1_amd64.AppImage",
+          "size": 85232120,
+          "sha256": "a2531fc4a102011d5bafa8b5d0cbc3732c4e0907feb2df7bda87ad6b46a02de4"
+        },
+        {
+          "platform": "linux",
+          "arch": "x64",
+          "format": "deb",
+          "file": "Engram_0.2.1_amd64.deb",
+          "size": 10190740,
+          "sha256": "77a39a94145b8edaa7b2b21505c77841137e51903325b7f077c2bad98a9eb86c"
+        },
+        {
+          "platform": "windows",
+          "arch": "x64",
+          "format": "exe",
+          "file": "Engram_0.2.1_x64-setup.exe",
+          "size": 6884069,
+          "sha256": "31fcb84f75c9a21ac67d743ca0b414c8d03b97e884acce3eea2d83e5076a8700"
+        },
+        {
+          "platform": "macos",
+          "arch": "x64",
+          "format": "dmg",
+          "file": "Engram_0.2.1_x64.dmg",
+          "size": 9795510,
+          "sha256": "d7f05180aca3d94001b91d329806fbb5bd535b627a909bdcc18b82b6d8ac3ba0"
+        },
+        {
+          "platform": "windows",
+          "arch": "x64",
+          "format": "msi",
+          "file": "Engram_0.2.1_x64_en-US.msi",
+          "size": 9355264,
+          "sha256": "2407547f071107c382050fa38edf47f9a4137894dbd158e8d492b76d3bfec790"
+        }
+      ]
+    },
+    {
       "version": "0.2.0",
       "tag": "v0.2.0",
       "date": "2026-09-26",
