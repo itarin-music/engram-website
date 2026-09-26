@@ -59,8 +59,7 @@ Engram makes no other connections. It doesn't check for updates, report errors, 
 
 This website is a set of static pages. It sets no cookies, runs no analytics, and loads nothing from third parties. Fonts are served from this site. Search runs entirely in your browser.
 
-- **Hosting.** The site is hosted by <span class="placeholder">[Cloudflare Pages]</span>. Like any web host, it processes technical information such as your IP address and browser type to deliver pages and protect against abuse, under its own privacy policy. We don't use this information to identify or track you.
-- **Downloads.** Installer files are downloaded from GitHub (github.com), so GitHub's privacy statement applies to those downloads.
+- **Hosting.** The site is hosted on GitHub Pages, and installer files are downloaded from GitHub (github.com). Like any web host, GitHub processes technical information such as your IP address and browser type to deliver pages and files and to keep its service secure, under GitHub's privacy statement. We don't receive this information and don't use it to identify or track you.
 - **Operating system detection.** The Download page checks which operating system your browser reports, to suggest the right file. This happens in your browser and isn't sent anywhere.
 
 ## Emailing us

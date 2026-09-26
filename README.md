@@ -37,7 +37,8 @@ src/content/docs/         the docs, one markdown file per page
 src/pages/                home, download, changelog, support, privacy, terms, 404
 src/assets/shots/         screenshots of the app (optimised to AVIF/WebP at build time)
 src/styles/global.css     colours and fonts, copied from the app's Modern Dark / Modern Light packs
-public/                   files copied as-is: favicon, robots.txt, _headers
+public/                   files copied as-is: favicon, robots.txt
+.github/workflows/        deploy.yml publishes the site to GitHub Pages
 scripts/                  release import and link checker
 ```
 
@@ -91,40 +92,43 @@ Installers are built by the app repo's GitHub Actions workflow and published to 
 
 Every version number, date, size and checksum on the site comes from that one file. With an empty `releases` list, the site shows a "coming soon" state everywhere and never links to files that don't exist.
 
-### Deploying (Cloudflare Pages)
+### Deploying (GitHub Pages)
 
-Cloudflare Pages is free for a site like this, provides HTTPS, deploys every push automatically, and gives every other branch its own preview URL. Engram's billing Worker is already on Cloudflare, so everything stays in one account.
+The site is hosted free on GitHub Pages with HTTPS. `.github/workflows/deploy.yml` builds it (type check, site, search index, link check) and publishes it on every push to `main`. A push to any other branch doesn't change the live site.
 
 One-time setup:
 
-1. Push this folder to a GitHub repository (it can be private), for example `itarin-music/engram-website`.
-2. In the Cloudflare dashboard, open **Workers & Pages**, then **Create**, choose the **Pages** tab and **Connect to Git**. (If Cloudflare suggests a Worker instead, look for "Pages" or "Looking to deploy Pages?".)
-3. Pick the repository, then set:
-   - **Production branch:** `main`
-   - **Framework preset:** Astro
-   - **Build command:** `npm run build`
-   - **Build output directory:** `dist`
-   - Node version: picked up from the `.node-version` file (22). If the build uses an older Node, add an environment variable `NODE_VERSION` = `22`.
-4. **Save and Deploy.** The site appears at `https://<project-name>.pages.dev`.
+1. **Create the repository.** On GitHub, create a new repository under `itarin-music` called `engram-website`. Make it **Public** (GitHub Pages on the free plan only works for public repos; nothing in this repo is secret). Don't add a README, licence or .gitignore, because this folder already has them.
+2. **Push this folder.** In PowerShell or Terminal, inside this folder:
 
-After that, every push to `main` deploys to production, and every push to another branch gets a preview URL. `public/_headers` sets security and caching headers, and `dist/404.html` is used for missing pages automatically.
+   ```bash
+   git remote add origin https://github.com/itarin-music/engram-website.git
+   git push -u origin main site-v1
+   ```
+
+3. **Turn on Pages.** In the repository, open **Settings**, then **Pages**. Under **Build and deployment**, set **Source** to **GitHub Actions**.
+4. **Run the first deploy.** Open the **Actions** tab, choose **Deploy website**, then **Run workflow** (or push any commit to `main`). It takes about two minutes. Until the custom domain below is set up, the site's styles and links won't work at the temporary `itarin-music.github.io/engram-website/` address, because the site is built for the root of its own domain. That's expected.
+
+After that, every push to `main` redeploys automatically. Missing pages show `404.html`.
 
 ### DNS: pointing engram.itarin.online at the site
 
-This adds **one** DNS record, `engram`, and doesn't touch `itarin.online` itself or any other subdomain or email record.
+This adds **one** DNS record, `engram`. It doesn't touch `itarin.online` itself, `www`, email records or any other subdomain, so you can keep hosting whatever you like on the main domain.
 
-Because `itarin.online` already uses Cloudflare DNS:
+1. **Verify the domain with GitHub (recommended, stops anyone else claiming your subdomains on GitHub Pages).** Open the settings of whoever owns the repo (your profile's **Settings**, or the organization's **Settings** if `itarin-music` is an organization), then **Pages**, then **Add a domain**. Enter `itarin.online`. GitHub shows a TXT record. In Cloudflare, open `itarin.online`, then **DNS**, then **Records**, and add that TXT record exactly as shown. Back on GitHub, press **Verify**.
+2. **Add the subdomain record in Cloudflare.** In **DNS**, **Records**, choose **Add record**:
+   - **Type:** `CNAME`
+   - **Name:** `engram`
+   - **Target:** `itarin-music.github.io`
+   - **Proxy status:** **DNS only** (grey cloud). GitHub needs to see the request directly to issue the HTTPS certificate.
 
-1. Open the Pages project, then **Custom domains**, then **Set up a custom domain**.
-2. Enter `engram.itarin.online` and continue.
-3. Cloudflare shows the record it will add (a CNAME from `engram` to `<project-name>.pages.dev`). Choose **Activate domain**.
-4. Wait a few minutes. The domain shows **Active** once the HTTPS certificate is issued.
-
-Do it in this order. If you create the CNAME yourself before adding the custom domain in Pages, requests fail with an error until the domain is added in the Pages project.
-
-If you ever need to set the record by hand (for example after moving DNS elsewhere): add a **CNAME** record with name `engram` and target `<project-name>.pages.dev` (proxied, if on Cloudflare), and still add the custom domain in the Pages project.
+   Save.
+3. **Tell GitHub about the domain.** In the `engram-website` repository, open **Settings**, then **Pages**. Under **Custom domain**, enter `engram.itarin.online` and press **Save**. Wait for the DNS check to go green.
+4. **Turn on HTTPS.** Once GitHub has issued the certificate (usually a few minutes, occasionally up to a day), tick **Enforce HTTPS** on the same page.
 
 To check it: `https://engram.itarin.online` should load with a valid certificate, and `https://engram.itarin.online/sitemap-index.xml` should list the pages.
+
+If the domain check fails, the usual causes are a typo in the CNAME target, the record being proxied (orange cloud) instead of DNS only, or DNS not having updated yet (wait a few minutes and press **Check again**).
 
 ### Search engines
 
@@ -134,4 +138,4 @@ If the domain ever changes, update `site` in `astro.config.mjs`, `url` in `src/c
 
 ### Analytics (optional, not installed)
 
-The site has no analytics on purpose. If you ever want visitor counts without tracking people, cookie-free options include Cloudflare Web Analytics (can be turned on in the Pages project without code changes), Plausible or GoatCounter. Adding any of them means updating the privacy policy and the "no analytics" statements on the site.
+The site has no analytics on purpose. If you ever want visitor counts without tracking people, cookie-free options include Cloudflare Web Analytics, Plausible or GoatCounter. Each needs a small script added to `src/layouts/Base.astro`. Adding any of them means updating the privacy policy and the "no analytics" statements on the site.
