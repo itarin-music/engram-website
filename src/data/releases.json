@@ -2,6 +2,70 @@
   "$comment": "Single source of release info for the whole site. Do not edit by hand: run `npm run release:import -- vX.Y.Z` after publishing a release. An empty list shows the 'coming soon' state everywhere.",
   "releases": [
     {
+      "version": "0.2.3",
+      "tag": "v0.2.3",
+      "date": "2026-09-26",
+      "notes": "## What's new in v0.2.3\n\n- **The tutor chat is now completely free.** No subscription, no sign-in, no \"1st month free.\" Bring your own API key or a local model and go. It was never really Engram's to charge for, since you're already paying for that AI access yourself.\n- **Cloud backup is Engram's one paid feature.** $5/month, first month free, cancel any time. Manual, one slot: \"Back up now\" snapshots your profile, \"Restore from backup\" brings it back on another machine.\n- **New: manage your subscription from the website.** Sign in with an email code at engram.itarin.online/subscription to check your Cloud backup status, subscribe, or open Stripe's billing portal without opening the app.",
+      "assets": [
+        {
+          "platform": "linux",
+          "arch": "x64",
+          "format": "rpm",
+          "file": "Engram-0.2.3-1.x86_64.rpm",
+          "size": 10190383,
+          "sha256": "a8a4f6bfc765834271571cc6f0181102e6815adccb08c9c0203f64b527186f51"
+        },
+        {
+          "platform": "macos",
+          "arch": "aarch64",
+          "format": "dmg",
+          "file": "Engram_0.2.3_aarch64.dmg",
+          "size": 9508847,
+          "sha256": "cadd9c39b970678c5962b2a9998da934f08cfde20deaff7ad9e3cf2066fa4614"
+        },
+        {
+          "platform": "linux",
+          "arch": "x64",
+          "format": "appimage",
+          "file": "Engram_0.2.3_amd64.AppImage",
+          "size": 85228024,
+          "sha256": "212bbf4119a8de1138556db41b19fbc44ca09244ab87e599086580b842efe1c0"
+        },
+        {
+          "platform": "linux",
+          "arch": "x64",
+          "format": "deb",
+          "file": "Engram_0.2.3_amd64.deb",
+          "size": 10190442,
+          "sha256": "f7f1e71eb9269cdcb5b5bb62c3132b7871cf9133713317210da42c5feac99d1c"
+        },
+        {
+          "platform": "windows",
+          "arch": "x64",
+          "format": "exe",
+          "file": "Engram_0.2.3_x64-setup.exe",
+          "size": 6881612,
+          "sha256": "8a50f51f142db7adb8df42b3fbf4cb2d5d16cf67d1fe8222ee855d7e3031727d"
+        },
+        {
+          "platform": "macos",
+          "arch": "x64",
+          "format": "dmg",
+          "file": "Engram_0.2.3_x64.dmg",
+          "size": 9795187,
+          "sha256": "f78baadd26644d3e39719dcd9ea91a0dbc1a85374f73ed7e5014736b1fffe303"
+        },
+        {
+          "platform": "windows",
+          "arch": "x64",
+          "format": "msi",
+          "file": "Engram_0.2.3_x64_en-US.msi",
+          "size": 9355264,
+          "sha256": "a7b69428dbe6b74d087bffff582af3e5b415760d204cd96493d9a72448edb70f"
+        }
+      ]
+    },
+    {
       "version": "0.2.1",
       "tag": "v0.2.1",
       "date": "2026-09-26",
