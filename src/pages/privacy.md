@@ -3,20 +3,20 @@ layout: ../layouts/Markdown.astro
 title: Privacy policy
 description: How Engram and this website handle your data, in plain English. Draft for review.
 kicker: Legal
-lead: The short version. Your notes and cards stay on your computer, and Engram doesn't track you. The optional tutor subscription needs your email address, and the AI provider you choose receives what you send it.
+lead: The short version. Your notes and cards stay on your computer, and Engram doesn't track you. The optional Cloud backup subscription needs your email address, and the AI provider you choose receives what you send it.
 draft: true
 updated: September 25, 2026
 searchable: false
 ---
 
-This policy covers the Engram desktop app, the optional tutor subscription, and this website (engram.itarin.online). Engram is made by Itarin ("we", "us"). Items shown like <span class="placeholder">[this]</span> are decisions still to be made.
+This policy covers the Engram desktop app, the optional Cloud backup subscription, and this website (engram.itarin.online). Engram is made by Itarin ("we", "us"). Items shown like <span class="placeholder">[this]</span> are decisions still to be made.
 
 ## Summary
 
 - **Your study material stays on your computer.** Notes, cards, review history, quizzes, chats, code and timer logs are stored in folders on your own computer. We never receive them.
 - **No tracking.** The app and this website have no analytics, telemetry, advertising, cookies or crash reporting.
 - **The AI tutor talks to a provider you choose.** When you use it, your messages and anything you attach go straight from your computer to that provider.
-- **The tutor subscription needs your email address.** We use it to send you a sign-in code and to match your subscription. Payments are handled by Stripe. We never see your card details.
+- **The Cloud backup subscription needs your email address.** We use it to send you a sign-in code and to match your subscription. Payments are handled by Stripe. We never see your card details.
 
 ## The Engram app
 
@@ -41,7 +41,7 @@ That provider handles the data under its own privacy policy and terms. We don't 
 
 Your API key is kept only for the current session unless you tick **Remember on this device**, in which case it's saved in plain text in the app's local storage on your computer. It is never sent to us.
 
-**2. The tutor subscription service**, if you sign in to subscribe. It's run by us on Cloudflare. It is used to:
+**2. The Cloud backup subscription service**, if you sign in to subscribe. It's run by us on Cloudflare. It is used to:
 
 - **Send a one-time sign-in code** to the email address you enter. The email is delivered by Resend, an email delivery service. The code is stored for up to 10 minutes.
 - **Keep a subscription record** for your email address: the address itself, an identifier derived from it, your Stripe customer and subscription identifiers, your subscription status, the end of your current billing period, and when the record was last updated.
@@ -51,7 +51,7 @@ The subscription service never receives your notes, cards, chats or API key.
 
 **3. Stripe**, for payments. Stripe collects your payment details directly. We receive from Stripe your customer identifier, subscription status and billing period, and the email address used at checkout. Stripe's privacy policy covers what Stripe does with your data.
 
-On your computer, Engram keeps a sign-in token (valid for 30 days) and a signed record of your subscription status (valid for 4 days) so the tutor keeps working when you're briefly offline.
+On your computer, Engram keeps a sign-in token (valid for 30 days) and a signed record of your subscription status (valid for 4 days) so Cloud backup keeps working when you're briefly offline.
 
 Engram makes no other connections. It doesn't check for updates, report errors, or send usage statistics.
 
@@ -74,14 +74,14 @@ If you email support, we receive your email address and whatever you include. We
 
 ## Your choices and rights
 
-- You can use every part of Engram except the tutor chat without giving us any personal data.
+- You can use every part of Engram, including the tutor chat, without giving us any personal data. Only Cloud backup needs your email address.
 - You can cancel your subscription at any time through **Manage subscription**.
 - You can ask us to access, correct or delete the subscription record or emails we hold about you by contacting us. Some billing records may need to be kept for legal reasons. Records held by Stripe are covered by Stripe's policy.
 - Depending on where you live, you may have further rights under laws such as the GDPR or CCPA. <span class="placeholder">[Review which laws apply]</span>
 
 ## Children
 
-Engram isn't directed at children under 13, and the tutor subscription requires a payment method. We don't knowingly collect personal data from children. <span class="placeholder">[Confirm the right age for the countries you serve]</span>
+Engram isn't directed at children under 13, and the Cloud backup subscription requires a payment method. We don't knowingly collect personal data from children. <span class="placeholder">[Confirm the right age for the countries you serve]</span>
 
 ## Changes to this policy
 

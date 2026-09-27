@@ -61,7 +61,7 @@ If the profile no longer appears in Engram, see the next section.
 4. Open Engram. If it's the first launch, you can press **Skip setup and use defaults** for now.
 5. Go to **Profiles**, press **New profile**, give it a name, press **Browse** under the vault folder, and pick the folder you copied.
 6. Press **Create**. Your notes, decks, review history and settings are all there.
-7. Set up your AI provider key again in **Settings, Tutor & API key**, and sign in to the tutor add-on under **Settings, Plan** if you use it.
+7. Set up your AI provider key again in **Settings, Tutor & API key**, and sign in to your Cloud backup subscription under **Settings, Backup** if you use it.
 
 If you skipped setup in step 4, you can remove the empty "My Study" profile afterwards in **Profiles**.
 

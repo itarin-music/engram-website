@@ -1,12 +1,12 @@
 ---
 layout: ../../layouts/Markdown.astro
 title: Troubleshooting
-description: Fixes for the most common Engram problems, from install warnings and an app that won't open to missing notes and tutor errors.
+description: Fixes for the most common Engram problems, from install warnings and an app that won't open to missing notes and Cloud backup errors.
 kicker: Support
 lead: Find your problem below. Each section starts with the most likely cause.
 ---
 
-**Jump to:** [Install warnings](#install-warnings) · [Engram won't open](#engram-wont-open) · [Lost or missing data](#lost-or-missing-data) · [Notes and cards](#notes-and-cards) · [Quizzes and Explain](#quizzes-and-explain) · [Import](#import) · [Code](#code) · [Timers](#timers) · [AI tutor](#ai-tutor)
+**Jump to:** [Install warnings](#install-warnings) · [Engram won't open](#engram-wont-open) · [Lost or missing data](#lost-or-missing-data) · [Notes and cards](#notes-and-cards) · [Quizzes and Explain](#quizzes-and-explain) · [Import](#import) · [Code](#code) · [Timers](#timers) · [AI tutor](#ai-tutor) · [Cloud backup](#cloud-backup)
 
 ## Install warnings
 
@@ -164,6 +164,10 @@ The local server isn't running, or the address is wrong.
 
 Then press **Detect models** and **Test connection**.
 
+## Cloud backup
+
+The tutor chat is free and never needs sign-in or payment. Everything below is about the separate, optional Cloud backup subscription (Settings, Backup, or the [Subscription](/subscription/) page on this site).
+
 ### My sign-in code didn't arrive
 
 Check your spam or junk folder. Codes expire after 10 minutes. You can request a new one after about 45 seconds. Make sure the email address is spelled correctly.
@@ -172,19 +176,19 @@ Check your spam or junk folder. Codes expire after 10 minutes. You can request a
 
 Use the code from the most recent email. After too many wrong tries, press **Resend code** to get a new one.
 
-### I paid but the tutor is still locked
+### I paid but Cloud backup is still locked
 
-Come back to Engram after finishing checkout and press **I've paid, check now**. It can take a few seconds for the payment to be confirmed. Make sure you signed in with the same email you used at checkout.
+Come back to Engram (or the Subscription page) after finishing checkout and press **I've paid, check now** (or **Refresh status** on the website). It can take a few seconds for the payment to be confirmed. Make sure you signed in with the same email you used at checkout.
 
-### The tutor says my payment is past due
+### It says my payment is past due
 
 Your last payment didn't go through. Press **Manage subscription** and update your card.
 
-### The tutor locked itself while I was offline
+### Cloud backup locked itself while I was offline
 
-Engram needs to confirm your subscription at least every 4 days. Connect to the internet and open Chat. It unlocks once the check succeeds.
+Engram needs to confirm your subscription at least every 4 days. Connect to the internet and open Settings, Backup. It unlocks once the check succeeds.
 
-### Chat says this build has no billing server configured
+### It says this build has no billing server configured
 
 Official Engram downloads shouldn't show this. If you see it, please [report a bug](/support/report-a-bug/) and include the version you installed.
 

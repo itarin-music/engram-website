@@ -18,7 +18,7 @@ Everything else in Engram is free too, including AI-written quizzes, which only 
 
 ## Connect an AI provider
 
-1. Open **Settings**, then **Tutor & API key**. (Once the tutor is unlocked, **API settings** in Chat opens the same form.)
+1. Open **Settings**, then **Tutor & API key**. **API settings** in Chat opens the same form.
 2. Choose a **Provider**: OpenAI, OpenRouter, Ollama (local), LM Studio (local), or Custom OpenAI-compatible. This fills in the address and a suggested model.
 3. Check the **Model** name. For local servers, press **Detect models** to pick from what's installed.
 4. Paste your **API key** if your provider needs one.

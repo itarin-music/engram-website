@@ -40,7 +40,7 @@ A map of every section in the sidebar and a three-step example of how a note bec
 
 ### 5. Tutor (optional)
 
-Explains the AI tutor, what it needs and where your data goes, and lets you connect an AI provider now. The tutor chat is the one paid part of Engram. You can press **Skip for now** and set it up any time. See [AI tutor](/docs/features/tutor/).
+Explains the AI tutor, what it needs and where your data goes, and lets you connect an AI provider now. The tutor chat itself is free, no subscription. You can press **Skip for now** and set it up any time. See [AI tutor](/docs/features/tutor/).
 
 ### 6. Start
 

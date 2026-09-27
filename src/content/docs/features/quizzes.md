@@ -33,6 +33,6 @@ At the end you see your score and every question with your answer and the correc
 
 - **Retake** the same quiz.
 - Press **Card** on a missed question to save it as a flashcard (tagged `quiz-miss`).
-- **Ask tutor about missed** sends the questions you missed to the tutor chat (needs the tutor add-on).
+- **Ask tutor about missed** sends the questions you missed to the tutor chat (free, no subscription).
 
 Past quizzes are listed on the Quizzes page with your best score and number of attempts. Press **Take** to try one again, or the bin to delete it.

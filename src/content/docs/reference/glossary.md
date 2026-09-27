@@ -50,7 +50,7 @@ Reviewing things at growing intervals, just before you'd forget them. It's one o
 Take a card out of study without deleting it. Suspended cards show as HOLD.
 
 **Tutor**  
-The optional AI chat assistant. Paid add-on, and it needs an AI provider. See [AI tutor](/docs/features/tutor/).
+The optional AI chat assistant. Free, no subscription, but it needs an AI provider. See [AI tutor](/docs/features/tutor/).
 
 **Vault**  
 The folder where a profile's notes and database are kept. See [Your data](/docs/reference/your-data/).

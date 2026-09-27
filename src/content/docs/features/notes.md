@@ -51,7 +51,7 @@ Type two square brackets and a note name, like `[[Particles]]`. As you type, Eng
 - **Make card:** turns the text you've selected into a flashcard. See [Decks and cards](/docs/features/decks-and-cards/#make-a-card-from-a-note).
 - **Explain:** a free, offline summary of the note. See [Explain](/docs/features/explain/).
 - **Quiz:** makes a quiz from this note. See [Quizzes](/docs/features/quizzes/).
-- **Ask tutor:** opens the tutor chat with this note (and any selected text) attached. This needs the tutor add-on. See [AI tutor](/docs/features/tutor/).
+- **Ask tutor:** opens the tutor chat with this note (and any selected text) attached. Free, no subscription. See [AI tutor](/docs/features/tutor/).
 
 ## Markdown basics
 

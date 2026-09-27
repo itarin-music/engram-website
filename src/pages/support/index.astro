@@ -9,8 +9,8 @@ const groups: { id: string; title: string; items: QA[] }[] = [
   {
     id: 'faq-general', title: 'About Engram', items: [
       { id: 'what', q: 'What is Engram?', a: 'A study app for your computer. You write notes, turn the important parts into flashcards, and Engram shows each card again just before you would forget it (spaced repetition). It also makes quizzes from your material, gives offline summaries of notes, has a code practice sandbox and study timers, and an optional AI tutor.' },
-      { id: 'free', q: 'Is it really free?', a: 'Yes. Everything except the AI tutor chat is free, with no trial, no limits and no ads. The tutor chat is $5 a month with the first month free.' },
-      { id: 'account', q: 'Do I need an account?', a: 'No. Profiles in Engram are local workspaces on your computer, not online accounts. The only time you give an email address is if you subscribe to the tutor add-on.' },
+      { id: 'free', q: 'Is it really free?', a: 'Yes. Everything in Engram is free, including the AI tutor chat, with no trial, no limits and no ads. The one paid feature is Cloud backup: $5 a month, with the first month free.' },
+      { id: 'account', q: 'Do I need an account?', a: 'No. Profiles in Engram are local workspaces on your computer, not online accounts. The only time you give an email address is if you subscribe to Cloud backup.' },
       { id: 'offline', q: 'Does it work offline?', a: 'Yes. Notes, cards, study, built-in quizzes, Explain, code practice, timers, imports and themes all work with no internet connection. The tutor works offline too if you use a local model with LM Studio or Ollama.' },
       { id: 'mobile', q: 'Is there a phone or tablet version?', a: 'Not as a download at the moment. Engram is a desktop app for Windows, macOS and Linux. Its code includes an installable web version for phones, but there is no public copy of it to install yet.' },
       { id: 'languages', q: 'Which subjects does it work for?', a: 'Any. It has extra templates for Japanese and programming, but nothing is tied to them. The app itself is in English.' },
@@ -30,17 +30,17 @@ const groups: { id: string; title: string; items: QA[] }[] = [
       { id: 'backup', q: 'How do I back up?', a: 'Close Engram and copy your profile\'s vault folder somewhere safe. That one folder holds everything for the profile. See <a href="/docs/reference/your-data/#back-up">Back up</a>.' },
       { id: 'move', q: 'Can I move Engram to a new computer?', a: 'Yes. Copy the vault folder across, then create a profile on the new computer that points at it. Step-by-step: <a href="/docs/reference/your-data/#move-to-a-new-computer">Move to a new computer</a>.' },
       { id: 'sync', q: 'Does Engram sync between computers?', a: 'No, there is no built-in sync. You can keep a vault in a cloud-synced folder, but only use it on one computer at a time.' },
-      { id: 'tracking', q: 'Does Engram collect data about me?', a: 'No. Engram has no analytics or telemetry. Your notes and cards never leave your computer unless you send them to an AI provider yourself. The <a href="/privacy/">privacy policy</a> explains the details, including what the tutor subscription needs.' },
+      { id: 'tracking', q: 'Does Engram collect data about me?', a: 'No. Engram has no analytics or telemetry. Your notes and cards never leave your computer unless you send them to an AI provider yourself. The <a href="/privacy/">privacy policy</a> explains the details, including what the Cloud backup subscription needs.' },
       { id: 'obsidian', q: 'Can I use my Obsidian vault with Engram?', a: 'Yes. Either import it, or create a profile that points at the vault folder and use it in place. Obsidian plugins, Dataview queries and Canvas files don\'t work inside Engram. See <a href="/docs/features/import/#obsidian-vault">Import</a>.' },
     ],
   },
   {
-    id: 'faq-tutor', title: 'AI tutor and billing', items: [
-      { id: 'what-need', q: 'What do I need for the tutor?', a: 'The tutor add-on ($5 a month, first month free) and an AI provider: either an API key from a service like OpenAI or OpenRouter, or a free local model in LM Studio or Ollama. See <a href="/docs/features/tutor/">AI tutor</a>.' },
-      { id: 'include-ai', q: 'Does the $5 include AI usage?', a: 'No. The subscription unlocks the chat screen in Engram. Any usage charges from an online AI provider are between you and that provider. Local models are free.' },
-      { id: 'cancel', q: 'How do I cancel?', a: 'Press Manage subscription in Chat or in Settings, Plan. It opens Stripe\'s customer portal, where you can cancel. The tutor stays unlocked until the end of the period you\'ve paid for.' },
-      { id: 'new-computer-sub', q: 'I got a new computer. How do I get my subscription back?', a: 'Open Chat or Settings, Plan, enter the same email address and the code it sends you. Your subscription is matched to your email.' },
-      { id: 'ai-quiz', q: 'Do AI-written quizzes need the subscription?', a: 'No. They only need an AI provider set up in Settings, Tutor &amp; API key. Built-in quizzes and Explain need neither.' },
+    id: 'faq-billing', title: 'Cloud backup and billing', items: [
+      { id: 'what-need', q: 'What do I need for Cloud backup?', a: 'Just an email address and the $5-a-month subscription (first month free). Sign in from Settings, Backup in the app, or from the <a href="/subscription/">Subscription</a> page on this site. It has nothing to do with the AI tutor, which is free either way.' },
+      { id: 'include-ai', q: 'Does the $5 have anything to do with the AI tutor?', a: 'No. Cloud backup and the AI tutor are unrelated. The tutor is free whether or not you subscribe to Cloud backup, and if you use an online AI provider for it, any usage charges are between you and that provider.' },
+      { id: 'cancel', q: 'How do I cancel?', a: 'Press Manage subscription in Settings, Backup, or on the <a href="/subscription/">Subscription</a> page on this site. It opens Stripe\'s customer portal, where you can cancel. Cloud backup stays unlocked until the end of the period you\'ve paid for.' },
+      { id: 'new-computer-sub', q: 'I got a new computer. How do I get my subscription back?', a: 'Open Settings, Backup (or the <a href="/subscription/">Subscription</a> page on this site), enter the same email address and the code it sends you. Your subscription is matched to your email.' },
+      { id: 'ai-quiz', q: 'Do AI-written quizzes need a subscription?', a: 'No. They only need an AI provider set up in Settings, Tutor &amp; API key. Built-in quizzes, Explain and the tutor chat itself need no subscription either.' },
     ],
   },
   {
@@ -56,7 +56,7 @@ const groups: { id: string; title: string; items: QA[] }[] = [
   <div class="not-prose support-top">
     <Search id="support-search" />
     <div class="quick">
-      <a class="device quick-card" href="/support/troubleshooting/"><strong>Troubleshooting</strong><span class="muted">Install warnings, the app won't open, missing data, tutor errors.</span></a>
+      <a class="device quick-card" href="/support/troubleshooting/"><strong>Troubleshooting</strong><span class="muted">Install warnings, the app won't open, missing data, Cloud backup errors.</span></a>
       <a class="device quick-card" href="/docs/"><strong>Docs</strong><span class="muted">How every part of Engram works.</span></a>
       <a class="device quick-card" href="/support/report-a-bug/"><strong>Report a bug</strong><span class="muted">What to include so it can be fixed.</span></a>
     </div>
