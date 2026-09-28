@@ -2,6 +2,70 @@
   "$comment": "Single source of release info for the whole site. Do not edit by hand: run `npm run release:import -- vX.Y.Z` after publishing a release. An empty list shows the 'coming soon' state everywhere.",
   "releases": [
     {
+      "version": "0.2.5",
+      "tag": "v0.2.5",
+      "date": "2026-09-28",
+      "notes": "Fixes a slowdown and a notes-not-showing bug affecting profiles with an existing vault (most noticeable when the vault is a real Obsidian folder).\n\nThe vault listing was walking into internal/hidden folders on every reload before filtering them out, including the profile's own live database folder and, for a real Obsidian vault, its plugin-cache folder. That's fixed now: those folders are skipped up front instead of walked and filtered after the fact.\n\nA new/empty profile wasn't affected, which is why deleting and recreating one worked around it.",
+      "assets": [
+        {
+          "platform": "linux",
+          "arch": "x64",
+          "format": "rpm",
+          "file": "Engram-0.2.5-1.x86_64.rpm",
+          "size": 10345687,
+          "sha256": "a6f5cc81b3c931ee724a530b3789db44138d08a75972f63439d63c9fbce074ed"
+        },
+        {
+          "platform": "macos",
+          "arch": "aarch64",
+          "format": "dmg",
+          "file": "Engram_0.2.5_aarch64.dmg",
+          "size": 9613022,
+          "sha256": "f08a819269f6da28ef4003f1fb5fa6a83e70bf5808f82cc2b6f2af1e0d75a683"
+        },
+        {
+          "platform": "linux",
+          "arch": "x64",
+          "format": "appimage",
+          "file": "Engram_0.2.5_amd64.AppImage",
+          "size": 85375480,
+          "sha256": "06f72b2e73073f90b4c27e35b6a5561773d9fa1e73af754d7aba471d60eb6003"
+        },
+        {
+          "platform": "linux",
+          "arch": "x64",
+          "format": "deb",
+          "file": "Engram_0.2.5_amd64.deb",
+          "size": 10344676,
+          "sha256": "67db72dc91611b1a099848d7db77eee84ba7c886b2d6e3b1bf2bdba91a7f7ab0"
+        },
+        {
+          "platform": "windows",
+          "arch": "x64",
+          "format": "exe",
+          "file": "Engram_0.2.5_x64-setup.exe",
+          "size": 6939144,
+          "sha256": "f9d365be8df44eacbb5ca7dc3bbe9c7bd4c5b5cd3f8507f26c35941c411079d7"
+        },
+        {
+          "platform": "macos",
+          "arch": "x64",
+          "format": "dmg",
+          "file": "Engram_0.2.5_x64.dmg",
+          "size": 9898211,
+          "sha256": "1c76f28141bdc317b9e37c01d7b91068b7fceff64872a3f9bf20eee6d5eef152"
+        },
+        {
+          "platform": "windows",
+          "arch": "x64",
+          "format": "msi",
+          "file": "Engram_0.2.5_x64_en-US.msi",
+          "size": 9437184,
+          "sha256": "be12e642147cc1fc02a0ab9d6e0e3ad8b8a154b48d33dfa818f5d026233ea0f8"
+        }
+      ]
+    },
+    {
       "version": "0.2.4",
       "tag": "v0.2.4",
       "date": "2026-09-28",
