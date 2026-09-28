@@ -2,6 +2,70 @@
   "$comment": "Single source of release info for the whole site. Do not edit by hand: run `npm run release:import -- vX.Y.Z` after publishing a release. An empty list shows the 'coming soon' state everywhere.",
   "releases": [
     {
+      "version": "0.2.4",
+      "tag": "v0.2.4",
+      "date": "2026-09-28",
+      "notes": "## What's new in v0.2.4\n\n- **Fixed: importing a notes vault could leave the Notes tab looking empty.** The import itself was always working, but the vault listing could silently abort if it hit even one unreadable folder anywhere in the tree (permissions, a broken symlink, a cloud-sync file that hadn't finished downloading, etc.), so the Notes tab would show nothing even though your notes were really there on disk. It now skips a bad folder instead of blanking the whole listing, and tells you if something still goes wrong instead of failing silently.\n- **Removed the decorative orbit graphic from the sidebar.**",
+      "assets": [
+        {
+          "platform": "linux",
+          "arch": "x64",
+          "format": "rpm",
+          "file": "Engram-0.2.4-1.x86_64.rpm",
+          "size": 10345839,
+          "sha256": "268d53cc72ebff4c4c1282d7320d8b564588c9ffc2267261f430adf0fdf24e2e"
+        },
+        {
+          "platform": "macos",
+          "arch": "aarch64",
+          "format": "dmg",
+          "file": "Engram_0.2.4_aarch64.dmg",
+          "size": 9613103,
+          "sha256": "1d8bc53b7277f2064d37a6cf69280165928eb6a24776670aa5953f88834321f8"
+        },
+        {
+          "platform": "linux",
+          "arch": "x64",
+          "format": "appimage",
+          "file": "Engram_0.2.4_amd64.AppImage",
+          "size": 85363192,
+          "sha256": "4a9ce87557733767169024fb74d802e98f8185016b8c6d2c2a0fe5a0208741df"
+        },
+        {
+          "platform": "linux",
+          "arch": "x64",
+          "format": "deb",
+          "file": "Engram_0.2.4_amd64.deb",
+          "size": 10345108,
+          "sha256": "7340607355b241249fb6544edd256138bd56a648aea5fd8f9bf0edb7d713b259"
+        },
+        {
+          "platform": "windows",
+          "arch": "x64",
+          "format": "exe",
+          "file": "Engram_0.2.4_x64-setup.exe",
+          "size": 6940059,
+          "sha256": "e8fa27ea8375cbf1bb91fcda600ecdbe968cd5c24833dc8763e0509cae796160"
+        },
+        {
+          "platform": "macos",
+          "arch": "x64",
+          "format": "dmg",
+          "file": "Engram_0.2.4_x64.dmg",
+          "size": 9898008,
+          "sha256": "c6f21f79870e64ca58168f3f52d6f60b1e755be12ba5f83788a92aef3dcbb190"
+        },
+        {
+          "platform": "windows",
+          "arch": "x64",
+          "format": "msi",
+          "file": "Engram_0.2.4_x64_en-US.msi",
+          "size": 9437184,
+          "sha256": "8af5c412f7340b9c26412f191e6d49dbd85f8a3940ef50d3162cecda73fc7c69"
+        }
+      ]
+    },
+    {
       "version": "0.2.3",
       "tag": "v0.2.3",
       "date": "2026-09-26",
