@@ -9,11 +9,11 @@
   /* Modern Dark (the app's default pack) */
   --bg: 16 17 20; --bg-2: 22 24 28; --panel: 27 30 36; --panel-2: 34 38 46;
   --ink: 242 243 245; --ink-dim: 167 173 186; --line: 51 56 63;
-  --accent: 129 140 248; --accent-2: 34 211 238; --on-accent: 12 14 26;
+  --accent: 250 174 230; --accent-2: 237 69 129; --on-accent: 12 14 26;
   --lcd-bg: 34 38 46; --lcd-ink: 129 220 255;
   --ok: 74 222 128; --warn: 250 204 21; --bad: 248 113 113;
-  --glow: 129 140 248;
-  --backdrop: radial-gradient(1000px 560px at 85% -8%, rgba(129, 140, 248, 0.1), transparent 60%), linear-gradient(180deg, #121317 0%, #0f1013 100%);
+  --glow: 250 174 230;
+  --backdrop: radial-gradient(1000px 560px at 85% -8%, rgba(250, 174, 230, 0.1), transparent 60%), linear-gradient(180deg, #121317 0%, #0f1013 100%);
   --radius: 14px;
 
   --font-body: 'Inter Variable', 'Inter', 'Segoe UI', system-ui, sans-serif;
