@@ -2,6 +2,70 @@
   "$comment": "Single source of release info for the whole site. Do not edit by hand: run `npm run release:import -- vX.Y.Z` after publishing a release. An empty list shows the 'coming soon' state everywhere.",
   "releases": [
     {
+      "version": "0.2.6",
+      "tag": "v0.2.6",
+      "date": "2026-09-29",
+      "notes": "A small visual refresh: the default theme's accent color is now a light pastel pink instead of the old indigo/cyan, and the glow/bloom effect (the soft halo around buttons, panels, and the timer ring) has been removed entirely — it read as tacky, especially against the new pink.\n\nOnly the default theme (Modern Dark) changed — if you're using one of the other theme packs, nothing changes for you. The favicon/app icon in the title bar also picked up the new pink.",
+      "assets": [
+        {
+          "platform": "linux",
+          "arch": "x64",
+          "format": "rpm",
+          "file": "Engram-0.2.6-1.x86_64.rpm",
+          "size": 10344802,
+          "sha256": "4549c0601633e23e3fdf8fc5d2dc19a98abc8b57b37fc2d815e9d4675cfd55f4"
+        },
+        {
+          "platform": "macos",
+          "arch": "aarch64",
+          "format": "dmg",
+          "file": "Engram_0.2.6_aarch64.dmg",
+          "size": 9613013,
+          "sha256": "82d03ffff903c4ec054a6b54aba0e893a285a810bc1bd0a36f9f333d041b0a55"
+        },
+        {
+          "platform": "linux",
+          "arch": "x64",
+          "format": "appimage",
+          "file": "Engram_0.2.6_amd64.AppImage",
+          "size": 85371384,
+          "sha256": "61a9cc87ea22932bd0f58dce08d41cfe97d5538f7ecd46cd6621601dbb4ceb33"
+        },
+        {
+          "platform": "linux",
+          "arch": "x64",
+          "format": "deb",
+          "file": "Engram_0.2.6_amd64.deb",
+          "size": 10343898,
+          "sha256": "65068957eb2512e2ceb232aa0fedf5a34bab2fd369d272cb4c4f150dc45637a7"
+        },
+        {
+          "platform": "windows",
+          "arch": "x64",
+          "format": "exe",
+          "file": "Engram_0.2.6_x64-setup.exe",
+          "size": 6939654,
+          "sha256": "e4f3efeb308374efea840867495b2c84c2a2582a8038fd2827f28d3a962c8044"
+        },
+        {
+          "platform": "macos",
+          "arch": "x64",
+          "format": "dmg",
+          "file": "Engram_0.2.6_x64.dmg",
+          "size": 9897732,
+          "sha256": "2b927bec97c04e48ca1299ca6a1f01b12a0f2a6644c156a4d0c15114c6ca9461"
+        },
+        {
+          "platform": "windows",
+          "arch": "x64",
+          "format": "msi",
+          "file": "Engram_0.2.6_x64_en-US.msi",
+          "size": 9437184,
+          "sha256": "073817ed65955d15544b4da2483c0834955ad222aa4ea443f1df7bcb19b653c0"
+        }
+      ]
+    },
+    {
       "version": "0.2.5",
       "tag": "v0.2.5",
       "date": "2026-09-28",
