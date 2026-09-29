@@ -30,7 +30,7 @@ Click a pack to switch to it right away.
 - **Font density:** compact, comfortable or spacious.
 - **Glass blur:** how frosted the panels look.
 - **Scanlines:** an optional retro screen effect, off by default.
-- **Reduce effects:** turns off blur, glow, scanlines, floating motion and background gradients. This is also in the top bar (**FX on / FX off**) and in Settings.
+- **Reduce effects:** turns off blur, scanlines, floating motion and background gradients. This is also in the top bar (**FX on / FX off**) and in Settings.
 
 If your computer is set to reduce motion, Engram turns on Reduce effects for you when you first set it up.
 

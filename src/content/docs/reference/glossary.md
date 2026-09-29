@@ -41,7 +41,7 @@ A theme. Engram has seven built-in packs, and you can make your own. See [Themes
 A separate workspace with its own notes, cards, theme and timers. See [Profiles](/docs/getting-started/profiles/).
 
 **Reduce effects**  
-A setting that turns off blur, glow, motion and background gradients for a calmer, faster interface.
+A setting that turns off blur, motion and background gradients for a calmer, faster interface.
 
 **Spaced repetition**  
 Reviewing things at growing intervals, just before you'd forget them. It's one of the most reliable ways to remember things long term.

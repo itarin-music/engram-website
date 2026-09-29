@@ -30,7 +30,7 @@ A plain explanation of what Engram does: write notes, turn the important parts i
 
 ### 3. Look
 
-Pick a theme pack. Clicking a pack previews it straight away behind the setup window. You can also turn on **Reduce effects** here, which switches off glow, blur and motion. Everything on this step can be changed later in [Themes](/docs/features/themes/).
+Pick a theme pack. Clicking a pack previews it straight away behind the setup window. You can also turn on **Reduce effects** here, which switches off blur and motion. Everything on this step can be changed later in [Themes](/docs/features/themes/).
 
 ![The Look step showing the seven theme packs with colour swatches, and the Reduce effects option](../../../assets/shots/setup-look.png)
 
